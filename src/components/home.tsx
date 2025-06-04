@@ -32,7 +32,7 @@ const HomePage = () => {
       learnMoreHref: "/training",
     },
     {
-      title: "Accountability Check-ins",
+      title: "Accountability Check-Ins",
       description:
         "Regular support to keep you on track and motivated. Celebrate wins, navigate challenges, and adjust your approach as needed.",
       icon: <CheckCircle className="h-8 w-8" />,

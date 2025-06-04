@@ -67,6 +67,24 @@ const Header = ({ onBookCall = () => {} }: HeaderProps) => {
             One-to-One Coaching
           </a>
           <a
+            href="/training"
+            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium"
+          >
+            Training Programs
+          </a>
+          <a
+            href="/accountability"
+            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium"
+          >
+            Accountability Check-Ins
+          </a>
+          <a
+            href="/wellness"
+            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium"
+          >
+            Wellness Planning
+          </a>
+          <a
             href="#faq"
             className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium"
           >
@@ -125,6 +143,27 @@ const Header = ({ onBookCall = () => {} }: HeaderProps) => {
             onClick={handleLinkClick}
           >
             One-to-One Coaching
+          </a>
+          <a
+            href="/training"
+            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-2"
+            onClick={handleLinkClick}
+          >
+            Training Programs
+          </a>
+          <a
+            href="/accountability"
+            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-2"
+            onClick={handleLinkClick}
+          >
+            Accountability Check-Ins
+          </a>
+          <a
+            href="/wellness"
+            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-2"
+            onClick={handleLinkClick}
+          >
+            Wellness Planning
           </a>
           <a
             href="#faq"
