@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Menu, X, Calendar } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { Menu, X, Calendar, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 
@@ -10,6 +10,8 @@ interface HeaderProps {
 const Header = ({ onBookCall = () => {} }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
 
   // Handle scroll effect for sticky header
   useEffect(() => {
@@ -21,8 +23,19 @@ const Header = ({ onBookCall = () => {} }: HeaderProps) => {
       }
     };
 
+    const handleClickOutside = (event: MouseEvent) => {
+      if (servicesRef.current && !servicesRef.current.contains(event.target as Node)) {
+        setIsServicesOpen(false);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    document.addEventListener("mousedown", handleClickOutside);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   // Toggle mobile menu
@@ -48,42 +61,64 @@ const Header = ({ onBookCall = () => {} }: HeaderProps) => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a
-            href="#about"
-            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium"
+          
+          {/* Services Dropdown */}
+          <div 
+            className="relative" 
+            ref={servicesRef}
+            onMouseEnter={() => setIsServicesOpen(true)}
+            onMouseLeave={() => setIsServicesOpen(false)}
           >
-            About
-          </a>
-          <a
-            href="#services"
-            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium"
-          >
-            Services
-          </a>
-          <a
-            href="/coaching"
-            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium"
-          >
-            One-to-One Coaching
-          </a>
-          <a
-            href="/training"
-            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium"
-          >
-            Training Programs
-          </a>
-          <a
-            href="/accountability"
-            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium"
-          >
-            Accountability Check-Ins
-          </a>
-          <a
-            href="/wellness"
-            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium"
-          >
-            Wellness Planning
-          </a>
+            <button 
+              className="flex items-center text-gray-700 hover:text-[#4B0082] transition-colors font-medium gap-1"
+              onClick={() => setIsServicesOpen(!isServicesOpen)}
+            >
+              Services
+              <ChevronDown className={cn("h-4 w-4 transition-transform", isServicesOpen && "transform rotate-180")} />
+            </button>
+            
+            {/* Dropdown Menu - Dovetail Style */}
+            <div 
+              className={cn(
+                "absolute top-full left-0 w-64 bg-white mt-1 py-2 rounded-md shadow-lg border border-gray-200 z-50 transition-all duration-200 overflow-hidden",
+                isServicesOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"
+              )}
+              style={{
+                clipPath: "polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%)", // Dovetail style
+                transformOrigin: "top center"
+              }}
+            >
+              <a 
+                href="/coaching" 
+                className="block px-4 py-2 text-gray-700 hover:text-[#4B0082] hover:bg-gray-100 transition-colors"
+                onClick={() => setIsServicesOpen(false)}
+              >
+                One-to-One Coaching
+              </a>
+              <a 
+                href="/training" 
+                className="block px-4 py-2 text-gray-700 hover:text-[#4B0082] hover:bg-gray-100 transition-colors"
+                onClick={() => setIsServicesOpen(false)}
+              >
+                Training Programs
+              </a>
+              <a 
+                href="/wellness" 
+                className="block px-4 py-2 text-gray-700 hover:text-[#4B0082] hover:bg-gray-100 transition-colors"
+                onClick={() => setIsServicesOpen(false)}
+              >
+                Wellness Planning
+              </a>
+              <a 
+                href="/accountability" 
+                className="block px-4 py-2 text-gray-700 hover:text-[#4B0082] hover:bg-gray-100 transition-colors"
+                onClick={() => setIsServicesOpen(false)}
+              >
+                Accountability Check-Ins
+              </a>
+            </div>
+          </div>
+          
           <a
             href="#faq"
             className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium"
@@ -115,70 +150,64 @@ const Header = ({ onBookCall = () => {} }: HeaderProps) => {
         </button>
       </div>
 
-      {/* Mobile Navigation */}
-      <div
-        className={cn(
-          "md:hidden fixed inset-x-0 bg-[#FFF8E1] shadow-md transition-all duration-300 overflow-hidden",
-          isMenuOpen ? "max-h-[300px] py-4" : "max-h-0 py-0",
-        )}
-      >
-        <nav className="flex flex-col space-y-4 px-6">
-          <a
-            href="#about"
-            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-2"
-            onClick={handleLinkClick}
-          >
-            About
-          </a>
-          <a
-            href="#services"
-            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-2"
-            onClick={handleLinkClick}
-          >
-            Services
-          </a>
-          <a
-            href="/coaching"
-            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-2"
-            onClick={handleLinkClick}
-          >
-            One-to-One Coaching
-          </a>
-          <a
-            href="/training"
-            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-2"
-            onClick={handleLinkClick}
-          >
-            Training Programs
-          </a>
-          <a
-            href="/accountability"
-            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-2"
-            onClick={handleLinkClick}
-          >
-            Accountability Check-Ins
-          </a>
-          <a
-            href="/wellness"
-            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-2"
-            onClick={handleLinkClick}
-          >
-            Wellness Planning
-          </a>
-          <a
-            href="#faq"
-            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-2"
-            onClick={handleLinkClick}
-          >
-            FAQ
-          </a>
-          <a
-            href="#contact"
-            className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-2"
-            onClick={handleLinkClick}
-          >
-            Contact
-          </a>
+        {/* Mobile Navigation */}
+        <div
+          className={cn(
+            "md:hidden fixed inset-x-0 bg-[#FFF8E1] shadow-md transition-all duration-300 overflow-hidden z-50",
+            isMenuOpen ? "max-h-[400px] py-4" : "max-h-0 py-0",
+          )}
+        >
+          <nav className="flex flex-col space-y-4 px-6">
+            
+            {/* Mobile Services Section */}
+            <div className="py-2">
+              <div className="font-medium text-[#4B0082] border-b border-gray-200 pb-1 mb-2">Services</div>
+              <div className="pl-4 flex flex-col space-y-3">
+                <a
+                  href="/coaching"
+                  className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-1"
+                  onClick={handleLinkClick}
+                >
+                  One-to-One Coaching
+                </a>
+                <a
+                  href="/training"
+                  className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-1"
+                  onClick={handleLinkClick}
+                >
+                  Training Programs
+                </a>
+                <a
+                  href="/wellness"
+                  className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-1"
+                  onClick={handleLinkClick}
+                >
+                  Wellness Planning
+                </a>
+                <a
+                  href="/accountability"
+                  className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-1"
+                  onClick={handleLinkClick}
+                >
+                  Accountability Check-Ins
+                </a>
+              </div>
+            </div>
+            
+            <a
+              href="#faq"
+              className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-2"
+              onClick={handleLinkClick}
+            >
+              FAQ
+            </a>
+            <a
+              href="#contact"
+              className="text-gray-700 hover:text-[#4B0082] transition-colors font-medium py-2"
+              onClick={handleLinkClick}
+            >
+              Contact
+            </a>
           <Button
             onClick={() => {
               onBookCall();

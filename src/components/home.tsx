@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, CheckCircle, MessageCircle } from "lucide-react";
 import { Button } from "./ui/button";
@@ -9,11 +9,61 @@ import ContactForm from "./ContactForm";
 import Header from "./Header";
 
 const HomePage = () => {
+  // State for Calendly popup
+  const [showCalendly, setShowCalendly] = useState(false);
+
   // Animation variants
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
+  
+  // Add Calendly script and initialize when popup shows
+  useEffect(() => {
+    if (showCalendly) {
+      // Add Calendly script
+      const head = document.querySelector('head');
+      const script = document.createElement('script');
+      script.setAttribute('src', 'https://assets.calendly.com/assets/external/widget.js');
+      script.setAttribute('async', '');
+      head?.appendChild(script);
+      
+      // Add structured data for BookingService schema for SEO
+      const schemaScript = document.createElement('script');
+      schemaScript.setAttribute('type', 'application/ld+json');
+      schemaScript.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Discovery Call",
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "Momentum Coaching",
+          "description": "Personalized coaching services for women to reconnect with purpose through guidance that honors both ambition and self-care."
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        }
+      });
+      head?.appendChild(schemaScript);
+      
+      // Prevent body scrolling when modal is open
+      document.body.style.overflow = 'hidden';
+      
+      return () => {
+        // Clean up
+        if (head?.contains(script)) {
+          head.removeChild(script);
+        }
+        if (head?.contains(schemaScript)) {
+          head.removeChild(schemaScript);
+        }
+        document.body.style.overflow = 'auto';
+      };
+    }
+  }, [showCalendly]);
 
   // Service cards data
   const services = [
@@ -50,11 +100,12 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-[#FFF8E1]">
       <Header />
-      {/* Hero Section */}
-      <section
-        id="about"
-        className="relative px-4 py-20 md:py-32 max-w-7xl mx-auto text-center"
-      >
+      {/* Hero Section - Full Width White Background */}
+      <div className="w-full bg-white">
+        <section
+          id="about"
+          className="relative px-4 py-20 md:py-32 max-w-7xl mx-auto text-center"
+        >
         <motion.h1
           className="text-4xl md:text-6xl font-bold text-[#4B0082] mb-6"
           initial="hidden"
@@ -82,16 +133,81 @@ const HomePage = () => {
           animate="visible"
           variants={fadeIn}
           transition={{ delay: 0.4 }}
+          className="flex justify-center"
         >
           <Button
             size="lg"
             className="bg-[#4B0082] hover:bg-[#3a006b] text-white px-8 py-6 text-lg rounded-md flex items-center gap-2"
+            onClick={() => setShowCalendly(true)}
+            aria-label="Schedule a free coaching discovery call"
+            data-conversion-action="schedule-call"
           >
             <Calendar className="h-5 w-5" />
             Book a Free Discovery Call
           </Button>
         </motion.div>
       </section>
+      </div>
+
+      {/* Calendly Modal Popup */}
+      {showCalendly && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 p-4 backdrop-blur-sm transition-all duration-300"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="booking-modal-title"
+        >
+          <div 
+            className="relative bg-white w-full max-w-4xl h-[650px] rounded-lg shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200"
+          >
+            <header className="bg-[#4B0082] text-white py-4 px-6 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Calendar className="h-5 w-5" />
+                <h2 id="booking-modal-title" className="text-xl font-semibold">Schedule Your Free Discovery Call</h2>
+              </div>
+              <button 
+                className="text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-white rounded-full p-1"
+                onClick={() => setShowCalendly(false)}
+                aria-label="Close booking modal"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </header>
+            
+            <div className="p-6">
+              <p className="mb-4 text-gray-700">Select a convenient time for your complimentary 30-minute session. We'll discuss your goals and how Momentum Coaching can support your journey.</p>
+              
+              {/* IMPORTANT: SITE OWNER - REPLACE THIS SECTION WITH YOUR CALENDLY */}
+              <div className="border-2 border-dashed border-purple-300 rounded-lg p-8 text-center bg-purple-50">
+                <h3 className="text-xl font-semibold mb-4 text-[#4B0082]">Connect Your Calendly Account</h3>
+                <p className="mb-4">To display your availability calendar:</p>
+                <ol className="text-left list-decimal pl-5 mb-6 space-y-2">
+                  <li>Sign up or log in at <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="text-[#4B0082] underline">Calendly.com</a></li>
+                  <li>Create an event type for "Discovery Call"</li>
+                  <li>Set your availability preferences in Calendly</li>
+                  <li>Get your Calendly username and event link</li>
+                  <li>Replace the placeholder URL in this file with your actual Calendly link</li>
+                </ol>
+                <div className="bg-gray-100 p-4 rounded-lg text-sm font-mono mb-6 text-left overflow-x-auto">
+                  <p><span className="text-blue-600">data-url=</span><span className="text-green-600">"https://calendly.com/YOUR-USERNAME/discovery-call"</span></p>
+                </div>
+                <p className="text-sm text-gray-500">Once connected, users will see your availability first, then only provide their email after selecting a time slot.</p>
+              </div>
+              
+              {/* Uncomment and update this when you have your Calendly account */}
+              {/* 
+              <div 
+                className="calendly-inline-widget w-full"
+                data-url="https://calendly.com/YOUR-USERNAME/discovery-call?hide_gdpr_banner=1&background_color=ffffff&text_color=4B0082&primary_color=4B0082"
+                style={{ minWidth: '320px', height: '500px' }}
+              />
+              */}
+            </div>
+          </div>
+        </div>
+      )}
 
       <Separator className="max-w-5xl mx-auto opacity-30" />
 
