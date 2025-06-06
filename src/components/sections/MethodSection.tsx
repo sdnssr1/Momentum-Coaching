@@ -2,9 +2,14 @@ import { motion } from 'framer-motion';
 import Reveal from '../ui/Reveal';
 import { Check } from 'lucide-react';
 
-export default function MethodSection() {
+interface MethodSectionProps {
+  id?: string;
+}
+
+export default function MethodSection({ id }: MethodSectionProps) {
   return (
     <motion.section
+      id={id}
       className="py-20 px-8 max-w-[1280px] mx-auto bg-white"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}

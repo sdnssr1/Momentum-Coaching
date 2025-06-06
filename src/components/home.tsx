@@ -7,12 +7,14 @@ import ContactForm from "./ContactForm";
 import Header from "./Header";
 import ApplicationForm from "./ApplicationForm";
 import FAQAccordion from "./FAQAccordion";
+import FloatingCta from "./ui/FloatingCta";
 import { useLanguage } from "../lib/languageContext";
 
 // Import section components
 import Hero from "./sections/Hero";
+import IntroSection from "./sections/IntroSection";
 import ProblemSection from "./sections/ProblemSection";
-import MethodSection from "./sections/MethodSection";
+import MethodCardSection from "./sections/MethodCardSection";
 import TransformSection from "./sections/TransformSection";
 import PricingSection from "./sections/PricingSection";
 import FAQSection from "./sections/FAQSection";
@@ -107,15 +109,45 @@ const HomePage = () => {
     <div className="min-h-screen bg-white">
       <Header onApplyClick={() => setShowApplicationForm(true)} />
       
+      {/* Floating CTA that appears at bottom on desktop */}
+      <FloatingCta 
+        onApplyClick={() => setShowApplicationForm(true)} 
+        isFormOpen={showApplicationForm} 
+      />
+      
       {/* Page sections with scroll animations */}
       <Hero onApplyClick={() => setShowApplicationForm(true)} />
+      <IntroSection />
       <ProblemSection />
-      <MethodSection />
+      <MethodCardSection />
       <TransformSection />
       <PricingSection onApplyClick={() => setShowApplicationForm(true)} />
       <FAQSection />
 
-      {/* Application Form now is positioned inline in the page */}
+      {/* Application Form */}
+      {showApplicationForm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 p-4">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-purple-800">Application Form</h2>
+                <button 
+                  onClick={() => setShowApplicationForm(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <ApplicationForm 
+                isOpen={showApplicationForm} 
+                onClose={() => setShowApplicationForm(false)} 
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Calendly Modal Popup */}
       {showCalendly && (

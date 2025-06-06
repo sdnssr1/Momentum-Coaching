@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Button } from "./ui/button";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import React, { useState } from "react";
+import { Button } from "./ui/button";
 
 interface ApplicationFormProps {
   isOpen: boolean;
@@ -82,8 +81,8 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({
         return formData.customGoals !== "";
       case "contact":
         return (
-          formData.fullName !== "" && 
-          formData.email !== "" && 
+          formData.fullName !== "" &&
+          formData.email !== "" &&
           formData.phone !== ""
         );
       default:
@@ -97,7 +96,7 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({
       alert("Please complete all required fields before proceeding.");
       return;
     }
-    
+
     const nextIndex = currentStepIndex + 1;
     if (nextIndex < steps.length) {
       setCurrentStep(steps[nextIndex]);
@@ -125,7 +124,11 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({
 
   return (
     <div className="w-full h-full overflow-auto">
-      <div className={`relative w-full ${!disablePinkBackground ? "min-h-screen bg-[#D91A6D]" : ""} text-white py-8`}>
+      <div
+        className={`relative w-full ${
+          !disablePinkBackground ? "min-h-screen bg-[#592382]" : ""
+        } text-white py-8`}
+      >
         {/* Only show close button when not in dropdown */}
         {!disablePinkBackground && (
           <button
@@ -139,14 +142,17 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({
 
         {/* Only show title when not in dropdown */}
         {!disablePinkBackground && (
-          <h1 className="text-3xl font-bold text-center pt-8 pb-4">APPLY FOR A SPOT HERE</h1>
+          <h1 className="text-3xl font-bold text-center pt-8 pb-4">
+            APPLY FOR A SPOT HERE
+          </h1>
         )}
-        
+
         {/* Only show explanation text when not in dropdown */}
         {!disablePinkBackground && (
           <>
             <p className="text-center px-4 mb-6">
-              Signing up is noncommittal. I do recommend you to read through the website before going through your application.
+              Signing up is noncommittal. I do recommend you to read through the
+              website before going through your application.
             </p>
             {/* Separator line */}
             <hr className="border-t border-white/30 w-4/5 mx-auto" />
@@ -155,7 +161,6 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({
 
         {/* Main form content */}
         <div className="max-w-md mx-auto flex flex-col gap-4 px-4 pb-8">
-
           {/* Progress bar - subtle and elegant design */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex-grow h-[3px] bg-white/20 rounded-full overflow-hidden relative">
@@ -174,7 +179,9 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({
             <div className="space-y-4">
               {/* Only show this heading when not in dropdown */}
               {!disablePinkBackground && (
-                <h3 className="text-xl text-center mb-6">How can I help you?</h3>
+                <h3 className="text-xl text-center mb-6">
+                  How can I help you?
+                </h3>
               )}
 
               <Button
@@ -226,7 +233,7 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({
 
               {[
                 "USA/CANADA",
-                "SWEDEN",
+                "NORWAY",
                 "UK",
                 "EUROPE",
                 "AUSTRALIA",
@@ -323,7 +330,7 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({
                 value={formData.customGoals}
                 onChange={(e) => updateFormData("customGoals", e.target.value)}
               />
-              
+
               <Button
                 variant="outline"
                 className="w-full bg-transparent text-white border border-white hover:bg-white/20 rounded-full py-4 mt-4"
@@ -422,7 +429,7 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  
+
                   const prevIndex = currentStepIndex - 1;
                   if (prevIndex >= 0) {
                     setCurrentStep(steps[prevIndex]);
@@ -442,7 +449,7 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                
+
                 const nextIndex = currentStepIndex + 1;
                 if (nextIndex < steps.length) {
                   setCurrentStep(steps[nextIndex]);
@@ -450,7 +457,9 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({
                   // Form submission logic here
                   console.log("Form submitted:", formData);
                   // You could send this data to your backend here
-                  alert("Application submitted successfully! We'll be in touch soon.");
+                  alert(
+                    "Application submitted successfully! We'll be in touch soon."
+                  );
                   onClose();
                 }
               }}

@@ -116,17 +116,8 @@ const Header = ({
           </a>
         </div>
 
-        {/* Center section with Apply button */}
+        {/* Center section (Apply button removed) */}
         <div className="flex-1 flex justify-center">
-          <Button
-            ref={applyButtonRef}
-            onClick={() => setIsApplicationFormOpen(!isApplicationFormOpen)}
-            className="bg-[#4B0082] hover:bg-[#3a006b] text-white flex items-center gap-2 whitespace-nowrap min-w-[220px]"
-            data-component-name="_c"
-          >
-            APPLY FOR A SPOT HERE
-            <Maximize2 className="h-4 w-4" />
-          </Button>
 
           {/* Application Form Popup */}
           <AnimatePresence>
