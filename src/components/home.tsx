@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, Calendar, CheckCircle, MessageCircle } from "lucide-react";
-import { Button } from "./ui/button";
+import { Calendar, CheckCircle, MessageCircle, ArrowRight } from "lucide-react";
 import { Separator } from "./ui/separator";
+import { Button } from "./ui/button";
 import ServiceCard from "./ServiceCard";
-import FAQAccordion from "./FAQAccordion";
 import ContactForm from "./ContactForm";
 import Header from "./Header";
 import ApplicationForm from "./ApplicationForm";
+import FAQAccordion from "./FAQAccordion";
 import { useLanguage } from "../lib/languageContext";
+
+// Import section components
+import Hero from "./sections/Hero";
+import ProblemSection from "./sections/ProblemSection";
+import MethodSection from "./sections/MethodSection";
+import TransformSection from "./sections/TransformSection";
+import PricingSection from "./sections/PricingSection";
+import FAQSection from "./sections/FAQSection";
 
 const HomePage = () => {
   const { t } = useLanguage();
@@ -16,12 +23,6 @@ const HomePage = () => {
   const [showCalendly, setShowCalendly] = useState(false);
   // State for Application Form
   const [showApplicationForm, setShowApplicationForm] = useState(false);
-
-  // Animation variants
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
   
   // Add Calendly script and initialize when popup shows
   useEffect(() => {
@@ -105,44 +106,14 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header onApplyClick={() => setShowApplicationForm(true)} />
-      {/* Hero Section - Full Width White Background */}
-      <div className="w-full bg-white">
-        <section
-          id="about"
-          className="relative px-4 py-20 md:py-32 max-w-7xl mx-auto text-center"
-        >
-        <motion.h1
-          className="text-4xl md:text-6xl font-bold text-[#4B0082] mb-6"
-          initial="hidden"
-          animate="visible"
-          variants={fadeIn}
-        >
-          {t('home.heading1') || 'Feel Stronger. Live Clearer.'}
-          <br />
-          {t('home.heading2') || 'Move with Momentum.'}
-        </motion.h1>
-
-        <motion.p
-          className="text-xl md:text-2xl text-gray-700 mb-10 max-w-3xl mx-auto"
-          initial="hidden"
-          animate="visible"
-          variants={fadeIn}
-          transition={{ delay: 0.2 }}
-        >
-          {t('home.subtitle') || 'A safe space for women to reconnect with purpose through personalized guidance that honors both ambition and self-care.'}
-        </motion.p>
-
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeIn}
-          transition={{ delay: 0.4 }}
-          className="flex justify-center"
-        >
-          {/* Button removed as requested */}
-        </motion.div>
-      </section>
-      </div>
+      
+      {/* Page sections with scroll animations */}
+      <Hero onApplyClick={() => setShowApplicationForm(true)} />
+      <ProblemSection />
+      <MethodSection />
+      <TransformSection />
+      <PricingSection onApplyClick={() => setShowApplicationForm(true)} />
+      <FAQSection />
 
       {/* Application Form now is positioned inline in the page */}
 
