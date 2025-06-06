@@ -39,7 +39,7 @@ const translations = {
     // Introduction section
     'intro.altText': 'Hannah, Momentum Coach',
     'intro.heading': "Hi, I'm Hannah",
-    'intro.para1': "I built Momentum Coaching for women like you—ambitious, caring, and constantly balancing what you want to achieve with what your body and mind need to thrive.",
+    'intro.para1': 'I built Momentum Coaching for women like you—ambitious, caring, and ever-balancing between what you want to achieve and what your body and mind need to thrive.',
     'intro.para2': "As someone who's navigated the ups and downs of fitness journeys, I understand that sustainable change doesn't come from extreme measures or one-size-fits-all plans.",
     'intro.para3': "My approach combines evidence-based practices with genuine compassion, creating a partnership where you feel supported, understood, and empowered to build lasting momentum.",
 
@@ -72,6 +72,16 @@ const translations = {
     // FAQ section
     'faq.heading': 'Frequently Asked Questions',
     'faq.subheading': 'Answers to common questions about Momentum Coaching',
+    'faq.question1': 'Do I need to be at a certain fitness level to start?',
+    'faq.answer1': 'Not at all! Momentum Coaching is designed for women at all fitness levels. Whether you\'re just beginning your journey or looking to advance your current routine, we\'ll create a personalized approach that meets you exactly where you are and builds from there.',
+    'faq.question2': 'What does a typical coaching session feel like?',
+    'faq.answer2': 'Our sessions are collaborative, supportive, and focused on your specific goals. We\'ll start by checking in on your progress, address any challenges you\'ve faced, adjust your plan as needed, and provide clear guidance for moving forward. Every session is a judgment-free zone where questions are encouraged and your unique needs are prioritized.',
+    'faq.question3': 'How is this different from having a personal trainer?',
+    'faq.answer3': 'While personal trainers typically focus on workout execution, Momentum Coaching takes a more holistic approach. We address not just physical training but also nutrition, recovery, mindset, and how fitness integrates into your whole life. Our coaching relationship is ongoing, adaptive, and considers all aspects of wellness that contribute to sustainable results.',
+    'faq.question4': 'Can I try before committing to a full program?',
+    'faq.answer4': 'Absolutely! That\'s exactly why we offer a free discovery call. This gives us both a chance to discuss your goals, answer your questions, and determine if we\'re a good fit before you make any commitment. It\'s important that you feel completely comfortable with the coaching relationship from the start.',
+    'faq.question5': 'How do we handle setbacks or weeks when life gets overwhelming?',
+    'faq.answer5': 'Setbacks are a normal part of any journey and actually provide valuable learning opportunities. At Momentum Coaching, we build flexibility into your plan and approach challenges with compassion rather than judgment. We\'ll help you navigate busy periods, adjust expectations when needed, and develop strategies to maintain momentum even during life\'s inevitable ups and downs.',
 
     // Footer
     'footer.heading': 'Connect With Momentum',
@@ -88,6 +98,13 @@ const translations = {
     // Booking
     'booking.title': 'Schedule Your Free Discovery Call',
     'booking.description': "Select a convenient time for your complimentary 30-minute session. We'll discuss your goals and how Momentum Coaching can support your journey.",
+
+    // Newsletter
+    'newsletter.title': 'Join Momentum Notes',
+    'newsletter.description': 'Sign up for our newsletter to receive tips, inspiration, and updates on your wellness journey.',
+    'newsletter.placeholder': 'Your email',
+    'newsletter.button': 'Subscribe',
+    'newsletter.success': 'Thank you for subscribing! Watch your inbox for wellness tips and updates.',
   },
   no: {
     // Navigation
@@ -149,6 +166,16 @@ const translations = {
     // FAQ section
     'faq.heading': 'Ofte Stilte Spørsmål',
     'faq.subheading': 'Svar på vanlige spørsmål om Momentum Coaching',
+    'faq.question1': 'Må jeg være på et visst treningsnivå for å starte?',
+    'faq.answer1': 'Ikke i det hele tatt! Momentum Coaching er designet for kvinner på alle treningsnivåer. Enten du akkurat har begynt reisen din eller ønsker å forbedre din nåværende rutine, vil vi skape en personlig tilnærming som møter deg akkurat der du er og bygger videre derfra.',
+    'faq.question2': 'Hvordan føles en typisk coaching-økt?',
+    'faq.answer2': 'Våre økter er samarbeidende, støttende og fokusert på dine spesifikke mål. Vi begynner med å sjekke fremgangen din, adresserer eventuelle utfordringer du har møtt, justerer planen din etter behov og gir klar veiledning for veien videre. Hver økt er en dømningsfri sone hvor spørsmål oppmuntres og dine unike behov prioriteres.',
+    'faq.question3': 'Hvordan er dette annerledes enn å ha en personlig trener?',
+    'faq.answer3': 'Mens personlige trenere vanligvis fokuserer på treningsutførelse, tar Momentum Coaching en mer helhetlig tilnærming. Vi adresserer ikke bare fysisk trening, men også ernæring, restitusjon, tankesett og hvordan trening integreres i hele livet ditt. Vårt coaching-forhold er pågående, tilpasningsdyktig og tar hensyn til alle aspekter av velvære som bidrar til varige resultater.',
+    'faq.question4': 'Kan jeg prøve før jeg forplikter meg til et fullt program?',
+    'faq.answer4': 'Absolutt! Det er derfor vi tilbyr en gratis oppdagelsessamtale. Dette gir oss begge en sjanse til å diskutere målene dine, svare på spørsmålene dine og avgjøre om vi er en god match før du gjør en forpliktelse. Det er viktig at du føler deg helt komfortabel med coaching-forholdet fra starten.',
+    'faq.question5': 'Hvordan håndterer vi tilbakeslag eller uker når livet blir overveldende?',
+    'faq.answer5': 'Tilbakeslag er en normal del av enhver reise og gir faktisk verdifulle læringsmuligheter. Hos Momentum Coaching bygger vi fleksibilitet inn i planen din og tilnærmer oss utfordringer med medfølelse i stedet for dom. Vi vil hjelpe deg med å navigere travle perioder, justere forventninger når det trengs, og utvikle strategier for å opprettholde momentum selv under livets uunngåelige opp- og nedturer.',
 
     // Footer
     'footer.heading': 'Koble Til Momentum',
@@ -165,6 +192,13 @@ const translations = {
     // Booking
     'booking.title': 'Planlegg Din Gratis Oppdagelsessamtale',
     'booking.description': "Velg et passende tidspunkt for din komplimentære 30-minutters økt. Vi vil diskutere målene dine og hvordan Momentum Coaching kan støtte reisen din.",
+
+    // Newsletter
+    'newsletter.title': 'Bli Med I Momentum Notater',
+    'newsletter.description': 'Meld deg på vårt nyhetsbrev for å motta tips, inspirasjon og oppdateringer på din velværereise.',
+    'newsletter.placeholder': 'Din e-post',
+    'newsletter.button': 'Abonner',
+    'newsletter.success': 'Takk for at du abonnerer! Følg med i innboksen din for velvære-tips og oppdateringer.',
   }
 };
 

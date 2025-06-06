@@ -464,11 +464,10 @@ const HomePage = () => {
                   <img src="/logo.png" alt="Momentum Coaching Logo" className="h-16 md:h-20" />
                 </div>
                 <h3 className="text-2xl font-semibold mb-6 text-[#FFF8E1]">
-                  Join Momentum Notes
+                  {t('newsletter.title')}
                 </h3>
                 <p className="mb-6 text-white/90 text-lg max-w-md mx-auto">
-                  Sign up for our newsletter to receive tips, inspiration, and
-                  updates on your wellness journey.
+                  {t('newsletter.description')}
                 </p>
                 <form
                   className="space-y-4"
@@ -477,21 +476,20 @@ const HomePage = () => {
                   <div className="flex flex-col sm:flex-row gap-3">
                     <input
                       type="email"
-                      placeholder="Your email"
+                      placeholder={t('newsletter.placeholder')}
                       className="px-4 py-2 rounded-md text-gray-800 flex-grow focus:outline-none focus:ring-2 focus:ring-[#FFF8E1]/50"
                       aria-label="Email for newsletter"
                       required
                     />
                     <Button className="bg-[#FFF8E1] text-[#4B0082] hover:bg-[#FFF8E1]/90 transition-colors">
-                      Subscribe
+                      {t('newsletter.button')}
                     </Button>
                   </div>
                   <div
                     className="text-sm text-[#FFF8E1]/70 hidden"
                     id="newsletter-success"
                   >
-                    Thank you for subscribing! Watch your inbox for wellness
-                    tips and updates.
+                    {t('newsletter.success')}
                   </div>
                 </form>
               </div>
