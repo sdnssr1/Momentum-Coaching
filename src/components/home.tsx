@@ -7,10 +7,15 @@ import ServiceCard from "./ServiceCard";
 import FAQAccordion from "./FAQAccordion";
 import ContactForm from "./ContactForm";
 import Header from "./Header";
+import ApplicationForm from "./ApplicationForm";
+import { useLanguage } from "../lib/languageContext";
 
 const HomePage = () => {
+  const { t } = useLanguage();
   // State for Calendly popup
   const [showCalendly, setShowCalendly] = useState(false);
+  // State for Application Form
+  const [showApplicationForm, setShowApplicationForm] = useState(false);
 
   // Animation variants
   const fadeIn = {
@@ -68,38 +73,38 @@ const HomePage = () => {
   // Service cards data
   const services = [
     {
-      title: "One-to-One Coaching",
+      title: t('services.coaching'),
       description:
-        "Personalized sessions tailored to your unique goals and lifestyle. We'll work together to create sustainable habits that fit your schedule and preferences.",
+        t('services.coachingDesc') || "Personalized sessions tailored to your unique goals and lifestyle. We'll work together to create sustainable habits that fit your schedule and preferences.",
       icon: <MessageCircle className="h-8 w-8" />,
       learnMoreHref: "/coaching",
     },
     {
-      title: "Training Programs",
+      title: t('services.training'),
       description:
-        "Custom workout plans designed for your body, goals, and available equipment. Progress at your own pace with expert guidance every step of the way.",
+        t('services.trainingDesc') || "Custom workout plans designed for your body, goals, and available equipment. Progress at your own pace with expert guidance every step of the way.",
       icon: <ArrowRight className="h-8 w-8" />,
       learnMoreHref: "/training",
     },
     {
-      title: "Accountability Check-Ins",
+      title: t('services.accountability'),
       description:
-        "Regular support to keep you on track and motivated. Celebrate wins, navigate challenges, and adjust your approach as needed.",
+        t('services.accountabilityDesc') || "Regular support to keep you on track and motivated. Celebrate wins, navigate challenges, and adjust your approach as needed.",
       icon: <CheckCircle className="h-8 w-8" />,
       learnMoreHref: "/accountability",
     },
     {
-      title: "Wellness Planning",
+      title: t('services.wellness'),
       description:
-        "Holistic approach to nutrition, movement, rest, and mindfulness. Create balance that supports your physical and mental wellbeing.",
+        t('services.wellnessDesc') || "Holistic approach to nutrition, movement, rest, and mindfulness. Create balance that supports your physical and mental wellbeing.",
       icon: <Calendar className="h-8 w-8" />,
       learnMoreHref: "/wellness",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-[#FFF8E1]">
-      <Header />
+    <div className="min-h-screen bg-white">
+      <Header onApplyClick={() => setShowApplicationForm(true)} />
       {/* Hero Section - Full Width White Background */}
       <div className="w-full bg-white">
         <section
@@ -112,9 +117,9 @@ const HomePage = () => {
           animate="visible"
           variants={fadeIn}
         >
-          Feel Stronger. Live Clearer.
+          {t('home.heading1') || 'Feel Stronger. Live Clearer.'}
           <br />
-          Move with Momentum.
+          {t('home.heading2') || 'Move with Momentum.'}
         </motion.h1>
 
         <motion.p
@@ -124,8 +129,7 @@ const HomePage = () => {
           variants={fadeIn}
           transition={{ delay: 0.2 }}
         >
-          A safe space for women to reconnect with purpose through personalized
-          guidance that honors both ambition and self-care.
+          {t('home.subtitle') || 'A safe space for women to reconnect with purpose through personalized guidance that honors both ambition and self-care.'}
         </motion.p>
 
         <motion.div
@@ -135,19 +139,12 @@ const HomePage = () => {
           transition={{ delay: 0.4 }}
           className="flex justify-center"
         >
-          <Button
-            size="lg"
-            className="bg-[#4B0082] hover:bg-[#3a006b] text-white px-8 py-6 text-lg rounded-md flex items-center gap-2"
-            onClick={() => setShowCalendly(true)}
-            aria-label="Schedule a free coaching discovery call"
-            data-conversion-action="schedule-call"
-          >
-            <Calendar className="h-5 w-5" />
-            Book a Free Discovery Call
-          </Button>
+          {/* Button removed as requested */}
         </motion.div>
       </section>
       </div>
+
+      {/* Application Form now is positioned inline in the page */}
 
       {/* Calendly Modal Popup */}
       {showCalendly && (
@@ -163,7 +160,7 @@ const HomePage = () => {
             <header className="bg-[#4B0082] text-white py-4 px-6 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <Calendar className="h-5 w-5" />
-                <h2 id="booking-modal-title" className="text-xl font-semibold">Schedule Your Free Discovery Call</h2>
+                <h2 id="booking-modal-title" className="text-xl font-semibold">{t('booking.title') || 'Schedule Your Free Discovery Call'}</h2>
               </div>
               <button 
                 className="text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-white rounded-full p-1"
@@ -177,7 +174,7 @@ const HomePage = () => {
             </header>
             
             <div className="p-6">
-              <p className="mb-4 text-gray-700">Select a convenient time for your complimentary 30-minute session. We'll discuss your goals and how Momentum Coaching can support your journey.</p>
+              <p className="mb-4 text-gray-700">{t('booking.description') || "Select a convenient time for your complimentary 30-minute session. We'll discuss your goals and how Momentum Coaching can support your journey."}</p>
               
               {/* IMPORTANT: SITE OWNER - REPLACE THIS SECTION WITH YOUR CALENDLY */}
               <div className="border-2 border-dashed border-purple-300 rounded-lg p-8 text-center bg-purple-50">
@@ -212,34 +209,28 @@ const HomePage = () => {
       <Separator className="max-w-5xl mx-auto opacity-30" />
 
       {/* Introduction Section */}
-      <section className="px-4 py-16 max-w-5xl mx-auto">
+      <section className="px-4 py-16 max-w-5xl mx-auto transition-colors duration-700 ease-in-out">
         <div className="flex flex-col md:flex-row gap-10 items-center">
           <div className="md:w-1/3">
             <img
               src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=800&q=80"
-              alt="Hannah, Momentum Coach"
+              alt={t('intro.altText') || "Hannah, Momentum Coach"}
               className="rounded-full w-64 h-64 object-cover mx-auto shadow-lg"
             />
           </div>
 
           <div className="md:w-2/3">
             <h2 className="text-3xl font-semibold text-[#4B0082] mb-4">
-              Hi, I'm Hannah
+              {t('intro.heading') || "Hi, I'm Hannah"}
             </h2>
             <p className="text-gray-700 mb-4 text-lg">
-              I built Momentum Coaching for women like you—ambitious, caring,
-              and constantly balancing what you want to achieve with what your
-              body and mind need to thrive.
+              {t('intro.para1') || "I built Momentum Coaching for women like you—ambitious, caring, and constantly balancing what you want to achieve with what your body and mind need to thrive."}
             </p>
             <p className="text-gray-700 mb-4 text-lg">
-              As someone who's navigated the ups and downs of fitness journeys,
-              I understand that sustainable change doesn't come from extreme
-              measures or one-size-fits-all plans.
+              {t('intro.para2') || "As someone who's navigated the ups and downs of fitness journeys, I understand that sustainable change doesn't come from extreme measures or one-size-fits-all plans."}
             </p>
             <p className="text-gray-700 text-lg">
-              My approach combines evidence-based practices with genuine
-              compassion, creating a partnership where you feel supported,
-              understood, and empowered to build lasting momentum.
+              {t('intro.para3') || "My approach combines evidence-based practices with genuine compassion, creating a partnership where you feel supported, understood, and empowered to build lasting momentum."}
             </p>
           </div>
         </div>
@@ -248,13 +239,12 @@ const HomePage = () => {
       <Separator className="max-w-5xl mx-auto opacity-30" />
 
       {/* Services Section */}
-      <section id="services" className="px-4 py-16 max-w-6xl mx-auto">
+      <section id="services" className="px-4 py-16 max-w-6xl mx-auto transition-colors duration-700 ease-in-out bg-gradient-to-r from-white via-[#FFF8E1]/10 to-white">
         <h2 className="text-3xl font-semibold text-[#4B0082] mb-2 text-center">
-          How We'll Work Together
+          {t('servicesSection.heading') || "How We'll Work Together"}
         </h2>
         <p className="text-gray-700 mb-12 text-center max-w-3xl mx-auto text-lg">
-          Momentum Coaching offers personalized support through several
-          complementary approaches, each designed to meet you where you are.
+          {t('servicesSection.description') || "Momentum Coaching offers personalized support through several complementary approaches, each designed to meet you where you are."}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -270,117 +260,117 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Application form was moved to the header dropdown */}
+
       {/* Why Choose Momentum */}
-      <section className="px-4 py-16 bg-white">
-        <div className="max-w-5xl mx-auto">
+      <section className="px-4 py-16 bg-gradient-to-b from-white via-[#FFF8E1]/10 to-white transition-all duration-700 ease-in-out">
+        <div className="max-w-5xl mx-auto transform transition-transform duration-700 ease-in-out">
           <h2 className="text-3xl font-semibold text-[#4B0082] mb-2 text-center">
-            Why Choose Momentum
+            {t('whySection.heading') || "Why Choose Momentum"}
           </h2>
           <p className="text-gray-700 mb-12 text-center max-w-3xl mx-auto text-lg">
-            What makes our approach different from traditional fitness coaching
+            {t('whySection.description') || "What makes our approach different from traditional fitness coaching"}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#FFF8E1] p-6 rounded-lg shadow-md">
+            <div className="bg-[#FFF8E1] p-6 rounded-lg shadow-md transition-all duration-700 ease-in-out hover:shadow-lg">
               <CheckCircle className="h-10 w-10 text-[#4B0082] mb-4" />
-              <h3 className="text-xl font-semibold text-[#4B0082] mb-2">
-                Empathy-Driven Coaching
+              <h3 className="text-xl font-semibold text-[#4B0082] mb-2 transition-colors duration-500">
+                {t('whySection.reason1.title') || "Empathy-Driven Coaching"}
               </h3>
-              <p className="text-gray-700">
-                We start by listening and understanding your unique story,
-                challenges, and aspirations before creating any plans.
+              <p className="text-gray-700 transition-colors duration-700">
+                {t('whySection.reason1.desc') || "We start by listening and understanding your unique story, challenges, and aspirations before creating any plans."}
               </p>
             </div>
 
-            <div className="bg-[#FFF8E1] p-6 rounded-lg shadow-md">
+            <div className="bg-[#FFF8E1] p-6 rounded-lg shadow-md transition-all duration-700 ease-in-out hover:shadow-lg">
               <CheckCircle className="h-10 w-10 text-[#4B0082] mb-4" />
-              <h3 className="text-xl font-semibold text-[#4B0082] mb-2">
-                Fully Customized Plans
+              <h3 className="text-xl font-semibold text-[#4B0082] mb-2 transition-colors duration-500">
+                {t('whySection.reason2.title') || "Fully Customized Plans"}
               </h3>
-              <p className="text-gray-700">
-                No cookie-cutter programs here—every recommendation is tailored
-                to your body, preferences, and lifestyle realities.
+              <p className="text-gray-700 transition-colors duration-700">
+                {t('whySection.reason2.desc') || "No cookie-cutter programs here—every recommendation is tailored to your body, preferences, and lifestyle realities."}
               </p>
             </div>
 
-            <div className="bg-[#FFF8E1] p-6 rounded-lg shadow-md">
+            <div className="bg-[#FFF8E1] p-6 rounded-lg shadow-md transition-all duration-700 ease-in-out hover:shadow-lg">
               <CheckCircle className="h-10 w-10 text-[#4B0082] mb-4" />
-              <h3 className="text-xl font-semibold text-[#4B0082] mb-2">
-                Mind-Body Focus
+              <h3 className="text-xl font-semibold text-[#4B0082] mb-2 transition-colors duration-500">
+                {t('whySection.reason3.title') || "Integration-Focused"}
               </h3>
-              <p className="text-gray-700">
-                We address both physical training and mental wellbeing,
-                recognizing that sustainable growth requires nurturing both.
+              <p className="text-gray-700 transition-colors duration-700">
+                {t('whySection.reason3.desc') || "We'll develop strategies that realistically fit into your life, rather than asking you to reshape your entire existence."}
               </p>
             </div>
           </div>
         </div>
       </section>
+      
+      {/* Gentle spacing between sections */}
+      <div className="h-16 max-w-5xl mx-auto bg-gradient-to-b from-white via-[#FFF8E1]/10 to-white transition-all duration-700 ease-in-out">
+      </div>
 
       {/* The Momentum Method */}
-      <section className="px-4 py-16 max-w-5xl mx-auto">
-        <h2 className="text-3xl font-semibold text-[#4B0082] mb-2 text-center">
-          The Momentum Method
-        </h2>
-        <p className="text-gray-700 mb-8 text-center max-w-3xl mx-auto text-lg">
-          Building sustainable progress that carries you forward even when
-          motivation fluctuates
-        </p>
+      <section className="py-16 w-full bg-gradient-to-b from-white via-[#FFF8E1]/5 to-white transition-all duration-700 ease-in-out">
+        <div className="max-w-6xl mx-auto px-4 mb-8">
+          <h2 className="text-3xl font-semibold text-[#4B0082] mb-2 text-center">
+            {t('momentumMethod.heading') || "The Momentum Method"}
+          </h2>
+          <p className="text-gray-700 mb-8 text-center max-w-3xl mx-auto text-lg">
+            {t('momentumMethod.subheading') || "Building sustainable progress that carries you forward even when motivation fluctuates"}
+          </p>
+        </div>
 
-        <div className="bg-white p-8 rounded-lg shadow-md">
+        <div className="bg-white/80 backdrop-blur-sm py-12 px-4 md:px-8 transition-all duration-700 ease-in-out">
+          <div className="max-w-6xl mx-auto">
           <p className="text-gray-700 mb-6 text-lg">
-            Momentum is the engine that keeps progress alive when motivation
-            inevitably dips. Unlike quick-fix approaches that lead to burnout,
-            we focus on building genuine momentum through:
+            {t('momentumMethod.intro') || "Momentum is the engine that keeps progress alive when motivation inevitably dips. Unlike quick-fix approaches that lead to burnout, we focus on building genuine momentum through:"}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div className="border-l-4 border-[#4B0082] pl-4">
-              <h3 className="text-xl font-semibold text-[#4B0082] mb-2">
-                Consistent Actions
+            <div className="border-l-4 border-[#4B0082] pl-4 transition-all duration-700 ease-in-out">
+              <h3 className="text-xl font-semibold text-[#4B0082] mb-2 transition-colors duration-500">
+                {t('momentumMethod.pillar1.title') || "Consistent Actions"}
               </h3>
-              <p className="text-gray-700">
-                Small, manageable steps that compound over time, creating
-                sustainable habits rather than exhausting sprints.
+              <p className="text-gray-700 transition-colors duration-700">
+                {t('momentumMethod.pillar1.desc') || "Small, manageable steps that compound over time, creating sustainable habits rather than exhausting sprints."}
               </p>
             </div>
 
-            <div className="border-l-4 border-[#4B0082] pl-4">
-              <h3 className="text-xl font-semibold text-[#4B0082] mb-2">
-                Thoughtful Adjustments
+            <div className="border-l-4 border-[#4B0082] pl-4 transition-all duration-700 ease-in-out">
+              <h3 className="text-xl font-semibold text-[#4B0082] mb-2 transition-colors duration-500">
+                {t('momentumMethod.pillar2.title') || "Thoughtful Adjustments"}
               </h3>
-              <p className="text-gray-700">
-                Regular reflection and fine-tuning of your approach based on
-                what's working and what needs to change.
+              <p className="text-gray-700 transition-colors duration-700">
+                {t('momentumMethod.pillar2.desc') || "Regular reflection and fine-tuning of your approach based on what's working and what needs to change."}
               </p>
             </div>
 
-            <div className="border-l-4 border-[#4B0082] pl-4">
-              <h3 className="text-xl font-semibold text-[#4B0082] mb-2">
-                Compassionate Support
+            <div className="border-l-4 border-[#4B0082] pl-4 transition-all duration-700 ease-in-out">
+              <h3 className="text-xl font-semibold text-[#4B0082] mb-2 transition-colors duration-500">
+                {t('momentumMethod.pillar3.title') || "Compassionate Support"}
               </h3>
-              <p className="text-gray-700">
-                Guidance that celebrates your wins and helps you navigate
-                challenges without judgment or pressure.
+              <p className="text-gray-700 transition-colors duration-700">
+                {t('momentumMethod.pillar3.desc') || "Guidance that celebrates your wins and helps you navigate challenges without judgment or pressure."}
               </p>
             </div>
           </div>
 
           <p className="text-gray-700 text-lg">
-            This balanced approach creates lasting change that fits into your
-            real life—no extreme measures required.
+            {t('momentumMethod.conclusion') || "This balanced and personalized approach helps you create sustainable progress that feels good and lasts—even when life gets complicated."}
           </p>
+          </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="px-4 py-16 bg-white">
+      <section id="faq" className="px-4 py-16 bg-white transition-colors duration-700 ease-in-out">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-semibold text-[#4B0082] mb-2 text-center">
-            Frequently Asked Questions
+            {t('faq.heading') || "Frequently Asked Questions"}
           </h2>
           <p className="text-gray-700 mb-12 text-center max-w-3xl mx-auto text-lg">
-            Answers to common questions about Momentum Coaching
+            {t('faq.subheading') || "Answers to common questions about Momentum Coaching"}
           </p>
 
           <FAQAccordion />
@@ -388,29 +378,27 @@ const HomePage = () => {
       </section>
 
       {/* Footer/Contact Section */}
-      <footer id="contact" className="px-4 py-16 bg-[#4B0082] text-white">
+      <footer id="contact" className="px-4 pt-24 pb-24 bg-[#4B0082] text-white transition-colors duration-700 ease-in-out">
         <div className="max-w-6xl mx-auto">
-          {/* Header */}
+          {/* Spacer */}
+          <div className="h-16"></div>
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4">
-              Connect With Momentum
+              {t('footer.heading') || "Connect With Momentum"}
             </h2>
             <p className="text-lg md:text-xl max-w-2xl mx-auto text-[#FFF8E1]/90">
-              Ready to start your journey or have questions? Reach out and let's
-              talk about how Momentum Coaching can support your goals.
+              {t('footer.subheading') || "Ready to start your journey or have questions? Reach out and let's talk about how Momentum Coaching can support your goals."}
             </p>
           </div>
 
           {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
-            {/* Left Column */}
-            <div className="space-y-10">
-              {/* Social Icons */}
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-[#FFF8E1]">
-                  Follow Along
+          <div className="max-w-2xl mx-auto space-y-10">
+            {/* Social Icons */}
+            <div className="text-center">
+                <h3 className="text-xl font-semibold mb-4 text-[#FFF8E1] text-center">
+                  {t('footer.socialHeading') || "Follow Along"}
                 </h3>
-                <div className="flex gap-4">
+                <div className="flex gap-4 justify-center">
                   <a
                     href="#"
                     className="transform transition-all duration-300 hover:scale-110 hover:bg-[#FFF8E1]/30"
@@ -470,8 +458,11 @@ const HomePage = () => {
                 </div>
               </div>
 
-              {/* Newsletter Signup */}
-              <div className="bg-white/10 p-6 rounded-lg">
+            {/* Newsletter Signup */}
+            <div className="bg-white/10 p-6 rounded-lg text-center">
+                <div className="flex justify-center mb-3">
+                  <img src="/logo.png" alt="Momentum Coaching Logo" className="h-16 md:h-20" />
+                </div>
                 <h3 className="text-xl font-semibold mb-4 text-[#FFF8E1]">
                   Join Momentum Notes
                 </h3>
@@ -505,116 +496,7 @@ const HomePage = () => {
                 </form>
               </div>
 
-              {/* Contact Form */}
-              <div className="bg-white/10 p-6 rounded-lg md:hidden">
-                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-[#FFF8E1]">
-                  <MessageCircle className="h-5 w-5" />
-                  Send a Message
-                </h3>
-                <ContactForm />
-              </div>
-            </div>
-
-            {/* Right Column */}
-            <div className="space-y-10">
-              {/* Contact Form (Desktop) */}
-              <div className="bg-white/10 p-6 rounded-lg hidden md:block">
-                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-[#FFF8E1]">
-                  <MessageCircle className="h-5 w-5" />
-                  Send a Message
-                </h3>
-                <ContactForm />
-              </div>
-
-              {/* Appointment Booking */}
-              <div className="bg-white/10 p-6 rounded-lg">
-                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-[#FFF8E1]">
-                  <Calendar className="h-5 w-5" />
-                  Book a Discovery Call
-                </h3>
-                <p className="mb-4 text-white/90">
-                  Schedule your free 30-minute consultation to discuss your
-                  goals and how we can work together.
-                </p>
-                <form
-                  className="space-y-4"
-                  onSubmit={(e) => e.preventDefault()}
-                >
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="booking-name"
-                      className="block text-sm font-medium text-[#FFF8E1]"
-                    >
-                      Name
-                    </label>
-                    <input
-                      id="booking-name"
-                      type="text"
-                      className="w-full px-4 py-2 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#FFF8E1]/50"
-                      placeholder="Your name"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="booking-email"
-                      className="block text-sm font-medium text-[#FFF8E1]"
-                    >
-                      Email
-                    </label>
-                    <input
-                      id="booking-email"
-                      type="email"
-                      className="w-full px-4 py-2 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#FFF8E1]/50"
-                      placeholder="your.email@example.com"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="booking-date"
-                      className="block text-sm font-medium text-[#FFF8E1]"
-                    >
-                      Preferred Date & Time
-                    </label>
-                    <input
-                      id="booking-date"
-                      type="datetime-local"
-                      className="w-full px-4 py-2 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#FFF8E1]/50"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="booking-message"
-                      className="block text-sm font-medium text-[#FFF8E1]"
-                    >
-                      What are your main goals? (Optional)
-                    </label>
-                    <textarea
-                      id="booking-message"
-                      className="w-full px-4 py-2 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#FFF8E1]/50 min-h-[80px]"
-                      placeholder="Briefly describe what you hope to achieve"
-                    />
-                  </div>
-
-                  <Button className="w-full bg-[#FFF8E1] text-[#4B0082] hover:bg-[#FFF8E1]/90 transition-colors py-6 text-lg font-semibold">
-                    Reserve Your Spot
-                  </Button>
-
-                  <div
-                    className="text-sm text-[#FFF8E1]/70 hidden"
-                    id="booking-success"
-                  >
-                    Thank you for scheduling a discovery call! We'll confirm
-                    your appointment shortly.
-                  </div>
-                </form>
-              </div>
-            </div>
+            {/* Mobile Contact Form removed */}
           </div>
 
           {/* Copyright */}

@@ -6,10 +6,10 @@ import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
 
 interface ContactFormProps {
-  onSubmit?: (data: FormData) => void;
+  onSubmit?: (data: ContactFormData) => void;
 }
 
-interface FormData {
+interface ContactFormData {
   name: string;
   email: string;
   message: string;
@@ -21,9 +21,9 @@ const ContactForm = ({ onSubmit = () => {} }: ContactFormProps) => {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>();
+  } = useForm<ContactFormData>();
 
-  const submitHandler = async (data: FormData) => {
+  const submitHandler = async (data: ContactFormData) => {
     try {
       await onSubmit(data);
       reset();

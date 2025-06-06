@@ -24,7 +24,7 @@ const ServiceCard = ({
   learnMoreHref = "#",
 }: ServiceCardProps) => {
   return (
-    <Card className="w-full max-w-[320px] h-[380px] flex flex-col bg-white border-purple-100 shadow-md hover:shadow-lg transition-shadow duration-300">
+    <Card className="w-full max-w-[320px] h-[380px] flex flex-col bg-[#FFF8E1] border-purple-100 shadow-md hover:shadow-lg transition-shadow duration-300">
       <CardHeader className="pb-2">
         {icon && (
           <div className="flex justify-center mb-4 text-[#4B0082]">{icon}</div>
