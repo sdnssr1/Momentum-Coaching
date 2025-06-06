@@ -121,7 +121,7 @@ const Header = ({
           <Button
             ref={applyButtonRef}
             onClick={() => setIsApplicationFormOpen(!isApplicationFormOpen)}
-            className="bg-[#4B0082] hover:bg-[#3a006b] text-white flex items-center gap-2 whitespace-nowrap"
+            className="bg-[#4B0082] hover:bg-[#3a006b] text-white flex items-center gap-2 whitespace-nowrap min-w-[220px]"
             data-component-name="_c"
           >
             APPLY FOR A SPOT HERE

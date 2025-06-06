@@ -378,10 +378,10 @@ const HomePage = () => {
       </section>
 
       {/* Footer/Contact Section */}
-      <footer id="contact" className="px-4 pt-24 pb-24 bg-[#4B0082] text-white transition-colors duration-700 ease-in-out">
+      <footer id="contact" className="px-8 pt-16 pb-24 bg-[#4B0082] text-white transition-colors duration-700 ease-in-out">
         <div className="max-w-6xl mx-auto">
-          {/* Spacer */}
-          <div className="h-16"></div>
+          {/* Reduced spacer */}
+          <div className="h-8"></div>
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               {t('footer.heading') || "Connect With Momentum"}
@@ -392,13 +392,13 @@ const HomePage = () => {
           </div>
 
           {/* Main Footer Content */}
-          <div className="max-w-2xl mx-auto space-y-10">
+          <div className="max-w-2xl mx-auto space-y-16">
             {/* Social Icons */}
-            <div className="text-center">
+            <div className="text-center py-4">
                 <h3 className="text-xl font-semibold mb-4 text-[#FFF8E1] text-center">
                   {t('footer.socialHeading') || "Follow Along"}
                 </h3>
-                <div className="flex gap-4 justify-center">
+                <div className="flex gap-8 justify-center">
                   <a
                     href="#"
                     className="transform transition-all duration-300 hover:scale-110 hover:bg-[#FFF8E1]/30"
@@ -459,14 +459,14 @@ const HomePage = () => {
               </div>
 
             {/* Newsletter Signup */}
-            <div className="bg-white/10 p-6 rounded-lg text-center">
+            <div className="bg-white/10 p-10 rounded-lg text-center">
                 <div className="flex justify-center mb-3">
                   <img src="/logo.png" alt="Momentum Coaching Logo" className="h-16 md:h-20" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4 text-[#FFF8E1]">
+                <h3 className="text-2xl font-semibold mb-6 text-[#FFF8E1]">
                   Join Momentum Notes
                 </h3>
-                <p className="mb-4 text-white/90">
+                <p className="mb-6 text-white/90 text-lg max-w-md mx-auto">
                   Sign up for our newsletter to receive tips, inspiration, and
                   updates on your wellness journey.
                 </p>
@@ -500,7 +500,7 @@ const HomePage = () => {
           </div>
 
           {/* Copyright */}
-          <div className="mt-16 pt-8 border-t border-white/20 text-center text-white/70">
+          <div className="mt-24 pt-12 border-t border-white/20 text-center text-white/70">
             <p>
               © {new Date().getFullYear()} Momentum Coaching. All rights
               reserved.
