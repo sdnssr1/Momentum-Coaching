@@ -46,36 +46,35 @@ const Header = ({
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4"
+        isScrolled 
+          ? "bg-transparent backdrop-blur-sm bg-white/10 py-2" 
+          : "bg-transparent py-4"
       )}
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
-          {/* Logo */}
+          {/* Logo (Left-aligned) */}
           <a href="/" className="flex items-center">
             <img
               src="/logo.png"
               alt="Momentum Coaching"
-              className="h-12"
+              className="h-16 md:h-20"
             />
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center justify-end space-x-8">
-            {/* Center section - empty after Services removal */}
-            <div className="flex-1"></div>
-
-            {/* Language Toggle */}
+          {/* Right controls */}
+          <div className="flex justify-end">
+            {/* Language Toggle (Desktop) */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center text-gray-800 hover:text-[#4B0082] transition-colors font-medium hover:bg-white/30 px-3 py-1 rounded-md"
+              className="hidden md:flex items-center text-gray-800 hover:text-[#4B0082] transition-colors font-medium bg-white/20 hover:bg-white/40 px-3 py-1 rounded-md shadow-sm"
             >
               {language === "en" ? "🇳🇴" : "🇬🇧"}
             </button>
-          </nav>
+          </div>
 
-          {/* Mobile Navigation Toggle */}
-          <div className="md:hidden flex items-center justify-end">
+          {/* Mobile Navigation Toggle - positioned inside the right spacer div */}
+          <div className="md:hidden absolute right-4 top-1/2 transform -translate-y-1/2">
             <button
               onClick={toggleMenu}
               className="text-gray-700 hover:text-[#4B0082] transition-colors"
@@ -97,7 +96,7 @@ const Header = ({
             transition={{ duration: 0.2 }}
             className="md:hidden overflow-hidden"
           >
-            <div className="bg-white shadow-lg rounded-b-lg px-4 py-5 mt-2">
+            <div className="bg-white/90 backdrop-blur-sm shadow-lg rounded-b-lg px-4 py-5 mt-2 border-t border-purple-100">
               <nav className="flex flex-col space-y-4">
 
                 {/* Language Toggle */}

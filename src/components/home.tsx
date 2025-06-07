@@ -1,21 +1,21 @@
+import { motion } from "framer-motion";
 import { ArrowRight, Calendar, CheckCircle, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLanguage } from "../lib/languageContext";
 import ApplicationForm from "./ApplicationForm";
 import Header from "./Header";
-import ServiceCard from "./ServiceCard";
 import { Button } from "./ui/button";
 import FloatingCta from "./ui/FloatingCta";
 import { Separator } from "./ui/separator";
 
 // Import section components
+import FAQSection from "./sections/FAQSection";
 import Hero from "./sections/Hero";
 import IntroSection from "./sections/IntroSection";
 import MethodCardSection from "./sections/MethodCardSection";
 import MyStorySection from "./sections/MyStorySection";
 import ProblemSection from "./sections/ProblemSection";
 import TransformSection from "./sections/TransformSection";
-import FAQSection from "./sections/FAQSection";
 
 const HomePage = () => {
   const { t } = useLanguage();
@@ -125,7 +125,7 @@ const HomePage = () => {
       <Hero onApplyClick={() => setShowApplicationForm(true)} />
       <IntroSection />
       <ProblemSection />
-      
+
       <MyStorySection />
       <MethodCardSection />
       <TransformSection />
@@ -309,9 +309,11 @@ const HomePage = () => {
               </h3>
               <div className="flex gap-8 justify-center">
                 <a
-                  href="#"
+                  href="https://www.instagram.com/hannahloee/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="transform transition-all duration-300 hover:scale-110 hover:bg-[#FFF8E1]/30"
-                  aria-label="Instagram"
+                  aria-label="Instagram - @hannahloee"
                 >
                   <div className="bg-white/20 p-3 rounded-full">
                     <svg
@@ -332,41 +334,192 @@ const HomePage = () => {
             </div>
 
             {/* Newsletter Signup */}
-            <div className="bg-white/10 p-10 rounded-lg text-center">
-              <div className="flex justify-center mb-3">
-                <img
+            <motion.div
+              className="bg-gradient-to-br from-white/30 to-white/10 p-10 rounded-[40px] text-center shadow-xl relative overflow-hidden"
+              style={{
+                boxShadow:
+                  "0 10px 30px rgba(255, 255, 255, 0.2), inset 0 -5px 20px rgba(255, 255, 255, 0.3)",
+              }}
+              initial={{ y: 0 }}
+              animate={{
+                y: [0, -15, 0],
+                scale: [1, 1.02, 1],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 6,
+                ease: "easeInOut",
+              }}
+            >
+              {/* Cloud-like decorative elements */}
+              <div className="absolute top-[-30px] left-[10%] w-24 h-16 bg-white/20 rounded-full blur-xl"></div>
+              <div className="absolute bottom-[-20px] right-[15%] w-32 h-16 bg-white/20 rounded-full blur-xl"></div>
+
+              <div className="flex justify-center mb-3 relative z-10">
+                <motion.img
                   src="/logo.png"
                   alt="Momentum Coaching Logo"
-                  className="h-16 md:h-20"
+                  className="h-32 md:h-40"
+                  animate={{ rotate: [-2, 2, -2] }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 4,
+                    ease: "easeInOut",
+                  }}
                 />
               </div>
-              <h3 className="text-2xl font-semibold mb-6 text-[#FFF8E1]">
-                {t("newsletter.title")}
-              </h3>
-              <p className="mb-6 text-white/90 text-lg max-w-md mx-auto">
-                {t("newsletter.description")}
-              </p>
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <input
-                    type="email"
-                    placeholder={t("newsletter.placeholder")}
-                    className="px-4 py-2 rounded-md text-gray-800 flex-grow focus:outline-none focus:ring-2 focus:ring-[#FFF8E1]/50"
-                    aria-label="Email for newsletter"
-                    required
-                  />
-                  <Button className="bg-[#FFF8E1] text-[#4B0082] hover:bg-[#FFF8E1]/90 transition-colors">
-                    {t("newsletter.button")}
-                  </Button>
+              <motion.h3
+                className="text-2xl font-semibold mb-6 text-[#FFF8E1] relative z-10"
+                animate={{
+                  scale: [1, 1.03, 1],
+                  color: ["#FFF8E1", "#ffffff", "#FFF8E1"],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 3,
+                  ease: "easeInOut",
+                }}
+              >
+                {t("newsletter.title") || "Join Momentum Notes"}
+              </motion.h3>
+              <motion.p
+                className="mb-6 text-white/90 text-lg max-w-md mx-auto relative z-10"
+                initial={{ opacity: 0.9 }}
+                animate={{
+                  y: [0, -8, 0, -5, 0],
+                  opacity: [0.9, 1, 0.95, 1, 0.9],
+                  textShadow: [
+                    "0 1px 3px rgba(255,255,255,0.1)",
+                    "0 3px 10px rgba(255,255,255,0.3)",
+                    "0 1px 3px rgba(255,255,255,0.1)",
+                  ],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 7,
+                  ease: "easeInOut",
+                }}
+              >
+                {t("newsletter.description") ||
+                  "Sign up for our newsletter to receive tips, inspiration, and updates on your wellness journey."}
+              </motion.p>
+              <form
+                className="space-y-4 relative z-10"
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const emailInput = e.currentTarget.querySelector(
+                    'input[type="email"]'
+                  ) as HTMLInputElement;
+                  const email = emailInput.value;
+
+                  if (email) {
+                    try {
+                      // Add loading state
+                      const successMessage =
+                        document.getElementById("newsletter-success");
+                      const submitButton =
+                        e.currentTarget.querySelector("button");
+                      if (submitButton) {
+                        submitButton.innerHTML = "Sending...";
+                        submitButton.setAttribute("disabled", "true");
+                      }
+
+                      // You'd implement an actual API call here
+                      // For now, we'll simulate a successful subscription
+                      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+                      // In production, you would use a service like EmailJS, Formspree, or your own backend API
+                      console.log(`Subscription request for: ${email}`);
+                      console.log(
+                        `Will send notification to: momentum@hannahloee.com`
+                      );
+
+                      // Show success message
+                      if (successMessage) {
+                        successMessage.classList.remove("hidden");
+                      }
+
+                      // Reset form
+                      emailInput.value = "";
+                      if (submitButton) {
+                        submitButton.innerHTML =
+                          t("newsletter.button") || "Subscribe";
+                        submitButton.removeAttribute("disabled");
+                      }
+                    } catch (error) {
+                      console.error("Error submitting form:", error);
+                      alert(
+                        "There was a problem submitting your subscription. Please try again."
+                      );
+                    }
+                  }
+                }}
+              >
+                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                  <motion.div
+                    className="flex-grow relative max-w-xs"
+                    whileHover={{ scale: 1.01 }}
+                  >
+                    <motion.input
+                      type="email"
+                      name="email"
+                      placeholder={t("newsletter.placeholder") || "Your email"}
+                      className="w-full px-4 py-2 rounded-full text-gray-800 focus:outline-none bg-white/90 backdrop-blur-sm border-2 border-transparent transition-all duration-300 focus:border-[#FFF8E1]"
+                      aria-label="Email for newsletter"
+                      required
+                      initial={{ boxShadow: "0 0 0 rgba(255,248,225,0)" }}
+                      whileFocus={{
+                        boxShadow: "0 0 15px rgba(255,248,225,0.3)",
+                        backgroundColor: "rgba(255,255,255,0.95)",
+                      }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                      // Add event handler for typing animation
+                      onChange={(e) => {
+                        const input = e.target;
+                        // Add a subtle scale pulse when typing
+                        if (input.value) {
+                          const el = input as HTMLElement;
+                          el.animate(
+                            [
+                              { transform: "scale(1.01)" },
+                              { transform: "scale(1)" },
+                            ],
+                            {
+                              duration: 200,
+                              easing: "ease-out",
+                            }
+                          );
+                        }
+                      }}
+                    />
+                  </motion.div>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Button
+                      type="submit"
+                      className="bg-[#FFF8E1] text-[#4B0082] hover:bg-[#FFF8E1]/90 transition-colors shadow-lg h-auto px-4 py-2 rounded-full"
+                    >
+                      {t("newsletter.button") || "Subscribe"}
+                    </Button>
+                  </motion.div>
                 </div>
                 <div
                   className="text-sm text-[#FFF8E1]/70 hidden"
                   id="newsletter-success"
                 >
-                  {t("newsletter.success")}
+                  {t("newsletter.success") ||
+                    "Thank you for subscribing! Watch your inbox for wellness tips and updates."}
                 </div>
+                {/* Hidden field for notification email */}
+                <input
+                  type="hidden"
+                  name="_notify"
+                  value="momentum@hannahloee.com"
+                />
               </form>
-            </div>
+            </motion.div>
 
             {/* Mobile Contact Form removed */}
           </div>

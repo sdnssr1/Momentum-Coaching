@@ -206,18 +206,14 @@ export default function MethodCardSection() {
                         {card.description}
                       </p>
 
-                      <div className="mt-auto rounded-lg overflow-hidden aspect-video">
-                        <img
-                          src={card.imageUrl}
-                          alt={`${card.headline} illustration`}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            // Fallback image if the specified one doesn't load
-                            const target = e.target as HTMLImageElement;
-                            target.src =
-                              "https://via.placeholder.com/320x180?text=Timeline+Image";
-                          }}
-                        />
+                      <div className="mt-auto rounded-lg overflow-hidden aspect-video bg-purple-100">
+                        {/* Use a gradient div as placeholder instead of potentially missing images */}
+                        <div 
+                          className="w-full h-full bg-gradient-to-br from-[#B663A9]/20 to-[#4B0082]/10 flex items-center justify-center"
+                          aria-label={`${card.headline} illustration`}
+                        >
+                          <span className="text-[#4B0082] opacity-50 text-sm font-light">{card.timeLabel}</span>
+                        </div>
                       </div>
                     </motion.div>
                   </div>

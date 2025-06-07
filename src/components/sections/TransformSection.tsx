@@ -24,14 +24,13 @@ export default function TransformSection() {
       <div className="grid md:grid-cols-3 gap-8">
         <Reveal>
           <div className="bg-white p-8 rounded-xl shadow-md">
-            <div className="h-48 mb-6 rounded-lg bg-gray-100 overflow-hidden">
-              <img 
-                src="/transform-1.jpg" 
-                alt="Client before and after transformation" 
-                className="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
+            <div className="h-48 mb-6 rounded-lg overflow-hidden">
+              <div 
+                className="w-full h-full bg-gradient-to-br from-purple-100 to-purple-300/30 flex items-center justify-center"
+                aria-label="Client before and after transformation"
+              >
+                <span className="text-purple-800/70 font-medium">Sarah's Journey</span>
+              </div>
             </div>
             <h3 className="text-xl font-semibold text-purple-800 mb-2">Sarah, 34</h3>
             <p className="text-gray-600 mb-4">
@@ -45,14 +44,13 @@ export default function TransformSection() {
 
         <Reveal>
           <div className="bg-white p-8 rounded-xl shadow-md">
-            <div className="h-48 mb-6 rounded-lg bg-gray-100 overflow-hidden">
-              <img 
-                src="/transform-2.jpg" 
-                alt="Client performing exercise with proper form" 
-                className="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
+            <div className="h-48 mb-6 rounded-lg overflow-hidden">
+              <div 
+                className="w-full h-full bg-gradient-to-br from-purple-200 to-purple-400/30 flex items-center justify-center"
+                aria-label="Client performing exercise with proper form"
+              >
+                <span className="text-purple-800/70 font-medium">Michael's Progress</span>
+              </div>
             </div>
             <h3 className="text-xl font-semibold text-purple-800 mb-2">Michael, 29</h3>
             <p className="text-gray-600 mb-4">
@@ -66,14 +64,13 @@ export default function TransformSection() {
 
         <Reveal>
           <div className="bg-white p-8 rounded-xl shadow-md">
-            <div className="h-48 mb-6 rounded-lg bg-gray-100 overflow-hidden">
-              <img 
-                src="/transform-3.jpg" 
-                alt="Client practicing mindful nutrition" 
-                className="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
+            <div className="h-48 mb-6 rounded-lg overflow-hidden">
+              <div 
+                className="w-full h-full bg-gradient-to-br from-purple-50 to-purple-200/40 flex items-center justify-center"
+                aria-label="Client practicing mindful nutrition"
+              >
+                <span className="text-purple-800/70 font-medium">Jaime's Transformation</span>
+              </div>
             </div>
             <h3 className="text-xl font-semibold text-purple-800 mb-2">Jaime, 37</h3>
             <p className="text-gray-600 mb-4">
