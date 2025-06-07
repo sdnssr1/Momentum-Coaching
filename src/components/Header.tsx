@@ -1,10 +1,8 @@
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Maximize2, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../lib/languageContext";
-import ApplicationForm from "./ApplicationForm";
-import { Button } from "./ui/button";
 
 interface HeaderProps {
   onBookCall?: () => void;
@@ -19,11 +17,8 @@ const Header = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const [isApplicationFormOpen, setIsApplicationFormOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
-  const applicationFormRef = useRef<HTMLDivElement>(null);
   const servicesButtonRef = useRef<HTMLButtonElement>(null);
-  const applyButtonRef = useRef<HTMLButtonElement>(null);
 
   // Handle scroll effect for sticky header
   useEffect(() => {
@@ -41,12 +36,6 @@ const Header = ({
         !servicesRef.current.contains(event.target as Node)
       ) {
         setIsServicesOpen(false);
-      }
-      if (
-        applicationFormRef.current &&
-        !applicationFormRef.current.contains(event.target as Node)
-      ) {
-        setIsApplicationFormOpen(false);
       }
     };
 
@@ -94,19 +83,17 @@ const Header = ({
   return (
     <header
       className={cn(
-        "w-full py-4 px-4 md:px-8 transition-all duration-300 z-50 backdrop-blur-md backdrop-saturate-150",
-        isScrolled
-          ? "fixed top-0 left-0 bg-white/10 shadow-lg border-b border-white/20"
-          : "relative bg-white/5"
+        "sticky top-0 z-40 w-full backdrop-blur transition-all",
+        isScrolled ? "bg-white/80" : "bg-transparent"
       )}
       data-component-name="Header"
       style={{
-        boxShadow: isScrolled ? '0 4px 30px rgba(0, 0, 0, 0.1)' : 'none',
+        boxShadow: isScrolled ? "0 4px 30px rgba(0, 0, 0, 0.1)" : "none",
       }}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
         {/* Left section with logo */}
-        <div className="flex-1 flex justify-start">
+        <div className="mr-auto flex">
           <a href="/" className="flex items-center">
             <img
               src="/logo.png"
@@ -126,8 +113,8 @@ const Header = ({
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center justify-end space-x-8">
             {/* Services Dropdown */}
-            <div 
-              className="relative" 
+            <div
+              className="relative"
               ref={servicesRef}
               onMouseEnter={() => setIsServicesOpen(true)}
               onMouseLeave={() => setIsServicesOpen(false)}
@@ -153,42 +140,49 @@ const Header = ({
                   <div
                     className="fixed z-50"
                     style={{
-                      top: `${servicesButtonRef.current?.getBoundingClientRect().bottom + window.scrollY}px`,
-                      left: `${(servicesButtonRef.current?.getBoundingClientRect().left)}px`,
+                      top: `${
+                        servicesButtonRef.current?.getBoundingClientRect()
+                          .bottom + window.scrollY
+                      }px`,
+                      left: `${
+                        servicesButtonRef.current?.getBoundingClientRect().left
+                      }px`,
                       width: "280px",
                       maxWidth: "280px",
                     }}
                   >
                     {/* Small connecting stem to services button */}
                     <div className="absolute top-[-10px] left-[25px] w-[20px] h-[15px] bg-[#4B0082] rounded-t-full z-40" />
-                    
+
                     <motion.div
-                      initial={{ 
+                      initial={{
                         scale: 0.9,
                         opacity: 0,
-                        y: -10
+                        y: -10,
                       }}
-                      animate={{ 
+                      animate={{
                         scale: 1,
                         opacity: 1,
-                        y: 0
+                        y: 0,
                       }}
-                      exit={{ 
+                      exit={{
                         scale: 0.9,
                         opacity: 0,
-                        y: -10
+                        y: -10,
                       }}
-                      transition={{ 
+                      transition={{
                         type: "spring",
                         stiffness: 500,
                         damping: 30,
-                        duration: 0.2
+                        duration: 0.2,
                       }}
                       className="bg-[#4B0082] overflow-hidden shadow-2xl w-full relative mx-0"
                       style={{
-                        backgroundImage: "radial-gradient(circle at 50% 0%, rgba(120, 40, 200, 0.8) 0%, rgba(75, 0, 130, 1) 70%)",
-                        boxShadow: "0 10px 30px rgba(0,0,0,0.3), inset 0 -10px 30px rgba(255,255,255,0.15), inset 0 10px 30px rgba(255,255,255,0.1)",
-                        borderRadius: "20px"
+                        backgroundImage:
+                          "radial-gradient(circle at 50% 0%, rgba(120, 40, 200, 0.8) 0%, rgba(75, 0, 130, 1) 70%)",
+                        boxShadow:
+                          "0 10px 30px rgba(0,0,0,0.3), inset 0 -10px 30px rgba(255,255,255,0.15), inset 0 10px 30px rgba(255,255,255,0.1)",
+                        borderRadius: "20px",
                       }}
                     >
                       <motion.div
@@ -199,14 +193,14 @@ const Header = ({
                             "25% 15% 18% 22% / 18% 22% 15% 20%",
                             "22% 18% 20% 15% / 20% 15% 18% 22%",
                             "18% 22% 15% 20% / 22% 18% 20% 15%",
-                            "20px"
-                          ]
+                            "20px",
+                          ],
                         }}
                         transition={{
                           repeat: Infinity,
                           repeatType: "mirror",
                           duration: 8,
-                          ease: "easeInOut"
+                          ease: "easeInOut",
                         }}
                       />
                       <motion.div
@@ -215,45 +209,46 @@ const Header = ({
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.2, duration: 0.3 }}
                       >
-                        <button 
+                        <button
                           onClick={() => setIsServicesOpen(false)}
                           className="absolute top-3 right-3 text-white hover:text-white/80 transition-colors z-20"
                           aria-label="Close services menu"
                         >
                           <X className="h-5 w-5" />
                         </button>
-                        
+
                         <div className="text-center mb-4">
                           <h2 className="text-xl font-bold uppercase tracking-wider text-white mb-1">
                             {t("nav.services") || "Services"}
                           </h2>
                           <div className="w-12 h-1 bg-white/50 mx-auto"></div>
                         </div>
-                        
+
                         <div className="flex flex-col space-y-2">
-                          <a 
-                            href="/services/coaching" 
+                          <a
+                            href="/services/coaching"
                             onClick={() => setIsServicesOpen(false)}
                             className="text-white hover:text-pink-200 py-2 px-3 rounded transition-colors text-center"
                           >
                             {t("services.coaching") || "One-to-One Coaching"}
                           </a>
-                          <a 
-                            href="/services/training" 
+                          <a
+                            href="/services/training"
                             onClick={() => setIsServicesOpen(false)}
                             className="text-white hover:text-pink-200 py-2 px-3 rounded transition-colors text-center"
                           >
                             {t("services.training") || "Training Program"}
                           </a>
-                          <a 
-                            href="/services/accountability" 
+                          <a
+                            href="/services/accountability"
                             onClick={() => setIsServicesOpen(false)}
                             className="text-white hover:text-pink-200 py-2 px-3 rounded transition-colors text-center"
                           >
-                            {t("services.accountability") || "Accountability Check-in"}
+                            {t("services.accountability") ||
+                              "Accountability Check-in"}
                           </a>
-                          <a 
-                            href="/services/wellness" 
+                          <a
+                            href="/services/wellness"
                             onClick={() => setIsServicesOpen(false)}
                             className="text-white hover:text-pink-200 py-2 px-3 rounded transition-colors text-center"
                           >
@@ -316,7 +311,6 @@ const Header = ({
                     } else {
                       setIsServicesOpen(true);
                     }
-                    setIsApplicationFormOpen(false);
                   }}
                   className="flex justify-between items-center w-full px-2 py-1.5 text-gray-700 hover:text-[#4B0082] transition-colors font-medium"
                 >
@@ -368,20 +362,13 @@ const Header = ({
                 )}
 
                 <a
-                  href="/about"
-                  className="block px-2 py-1.5 text-gray-700 hover:text-[#4B0082] transition-colors"
-                  onClick={handleLinkClick}
-                >
-                  {t("nav.about") || "About"}
-                </a>
-                <a
                   href="/contact"
                   className="block px-2 py-1.5 text-gray-700 hover:text-[#4B0082] transition-colors"
                   onClick={handleLinkClick}
                 >
                   {t("nav.contact") || "Contact"}
                 </a>
-                
+
                 {/* Language Toggle */}
                 <button
                   onClick={() => {
@@ -390,9 +377,7 @@ const Header = ({
                   }}
                   className="flex items-center px-2 py-1.5 text-gray-700 hover:text-[#4B0082] transition-colors"
                 >
-                  {language === "en" 
-                    ? "🇳🇴 Norsk" 
-                    : "🇬🇧 English"}
+                  {language === "en" ? "🇳🇴 Norsk" : "🇬🇧 English"}
                 </button>
               </nav>
             </div>

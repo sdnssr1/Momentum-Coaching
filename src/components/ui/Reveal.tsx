@@ -1,5 +1,5 @@
-import { useState, useEffect, ReactNode } from 'react';
-import { motion, HTMLMotionProps } from 'framer-motion';
+import { HTMLMotionProps, motion } from "framer-motion";
+import { ReactNode, useEffect, useState } from "react";
 
 interface RevealProps extends HTMLMotionProps<"div"> {
   children: ReactNode;
@@ -10,7 +10,9 @@ export default function Reveal({ children, ...props }: RevealProps) {
 
   useEffect(() => {
     // Check for reduced motion preference on component mount
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
     setShouldReduceMotion(prefersReducedMotion);
   }, []);
 
@@ -25,7 +27,9 @@ export default function Reveal({ children, ...props }: RevealProps) {
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, amount: 0.3 },
     transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-    className: `${props.className || ''} transition-opacity duration-500 ease-out will-change-transform`,
+    className: `${
+      props.className || ""
+    } transition-opacity duration-500 ease-out will-change-transform`,
   };
 
   return (

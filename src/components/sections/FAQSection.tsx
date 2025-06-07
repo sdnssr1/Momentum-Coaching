@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
-import Reveal from '../ui/Reveal';
-import FAQAccordion from '../FAQAccordion';
+import { motion } from "framer-motion";
+import FAQAccordion from "../FAQAccordion";
+import Reveal from "../ui/Reveal";
 
 export default function FAQSection() {
   // Using the existing FAQAccordion component from the project
@@ -12,17 +12,6 @@ export default function FAQSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
     >
-      <Reveal>
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-4xl font-bold text-purple-800 mb-6">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-xl text-gray-700">
-            Get answers to common questions about our coaching services.
-          </p>
-        </div>
-      </Reveal>
-
       <Reveal>
         <div className="max-w-3xl mx-auto">
           <FAQAccordion />
