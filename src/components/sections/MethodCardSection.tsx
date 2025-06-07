@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
-import Reveal from '../ui/Reveal';
-import { useEffect, useRef, useState } from 'react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import Reveal from "../ui/Reveal";
 
 interface TimelineCard {
   timeLabel: string;
@@ -15,63 +15,71 @@ export default function MethodCardSection() {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const sliderRef = useRef<HTMLDivElement>(null);
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
-  
+
   const timelineCards: TimelineCard[] = [
     {
       timeLabel: "DAY 0",
       headline: "Clarity Call",
-      description: "We meet on Zoom to map goals, constraints, and desired timeline.",
-      imageUrl: "/images/timeline/day0.jpg" // Images should be placed in the public directory
+      description:
+        "We meet on Zoom to map goals, constraints, and desired timeline.",
+      imageUrl: "/images/timeline/day0.jpg", // Images should be placed in the public directory
     },
     {
       timeLabel: "WEEK 1",
       headline: "Your Custom Blueprint",
-      description: "You receive a phased workout & nutrition plan aligned to hormones, schedule, and preferences.",
-      imageUrl: "/images/timeline/week1.jpg"
+      description:
+        "You receive a phased workout & nutrition plan aligned to hormones, schedule, and preferences.",
+      imageUrl: "/images/timeline/week1.jpg",
     },
     {
       timeLabel: "WEEK 2",
       headline: "Habit Foundations",
-      description: "Small daily actions anchor movement, hydration, and sleep; momentum starts here.",
-      imageUrl: "/images/timeline/week2.jpg"
+      description:
+        "Small daily actions anchor movement, hydration, and sleep; momentum starts here.",
+      imageUrl: "/images/timeline/week2.jpg",
     },
     {
       timeLabel: "WEEK 4",
       headline: "Momentum Checkpoint",
-      description: "First progress photos and metrics review; we tweak macros or training load if needed.",
-      imageUrl: "/images/timeline/week4.jpg"
+      description:
+        "First progress photos and metrics review; we tweak macros or training load if needed.",
+      imageUrl: "/images/timeline/week4.jpg",
     },
     {
       timeLabel: "WEEK 8",
       headline: "Change Others Notice",
-      description: "Friends and family see the glow; strength and confidence peak.",
-      imageUrl: "/images/timeline/week8.jpg"
+      description:
+        "Friends and family see the glow; strength and confidence peak.",
+      imageUrl: "/images/timeline/week8.jpg",
     },
     {
       timeLabel: "WEEK 12",
       headline: "Breakthrough Phase",
-      description: "Visible physique shifts and mental resilience; you master advanced lifts or longer runs.",
-      imageUrl: "/images/timeline/week12.jpg"
+      description:
+        "Visible physique shifts and mental resilience; you master advanced lifts or longer runs.",
+      imageUrl: "/images/timeline/week12.jpg",
     },
     {
       timeLabel: "WEEK 16",
       headline: "Lifestyle Integration",
-      description: "We lock in routines that fit travel, work, and cycles; wellness feels second-nature.",
-      imageUrl: "/images/timeline/week16.jpg"
+      description:
+        "We lock in routines that fit travel, work, and cycles; wellness feels second-nature.",
+      imageUrl: "/images/timeline/week16.jpg",
     },
     {
       timeLabel: "WEEK 20+",
       headline: "Self-Sustained Flow",
-      description: "You can fly solo or stay for elite coaching; either way, your new rhythm is yours for life.",
-      imageUrl: "/images/timeline/week20.jpg"
-    }
+      description:
+        "You can fly solo or stay for elite coaching; either way, your new rhythm is yours for life.",
+      imageUrl: "/images/timeline/week20.jpg",
+    },
   ];
 
   // Handle auto-play functionality
   useEffect(() => {
     const startAutoPlay = () => {
       if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
-      
+
       if (isAutoPlaying) {
         autoPlayTimerRef.current = setInterval(() => {
           goToNext();
@@ -80,7 +88,7 @@ export default function MethodCardSection() {
     };
 
     startAutoPlay();
-    
+
     return () => {
       if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
     };
@@ -88,13 +96,13 @@ export default function MethodCardSection() {
 
   // Navigation functions
   const goToPrev = () => {
-    setCurrentIndex((prevIndex) => 
+    setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? timelineCards.length - 1 : prevIndex - 1
     );
   };
 
   const goToNext = () => {
-    setCurrentIndex((prevIndex) => 
+    setCurrentIndex((prevIndex) =>
       prevIndex === timelineCards.length - 1 ? 0 : prevIndex + 1
     );
   };
@@ -110,7 +118,7 @@ export default function MethodCardSection() {
       const cardWidth = slider.scrollWidth / timelineCards.length;
       slider.scrollTo({
         left: currentIndex * cardWidth,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   }, [currentIndex]);
@@ -118,30 +126,27 @@ export default function MethodCardSection() {
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') {
+      if (e.key === "ArrowLeft") {
         goToPrev();
-      } else if (e.key === 'ArrowRight') {
+      } else if (e.key === "ArrowRight") {
         goToNext();
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   return (
-    <section 
-      id="method"
-      className="w-full py-20 px-4 md:px-8 bg-[#FDF4E9]"
-    >
+    <section id="method" className="w-full py-20 px-4 md:px-8 bg-[#FFF9E9]">
       <div className="max-w-6xl mx-auto flex flex-col gap-8 items-center">
         <h2 className="text-3xl md:text-4xl font-bold text-[#4B0082] mb-8 text-center font-poppins">
           How the Momentum Method Works
         </h2>
-        
+
         <div className="w-full relative">
           {/* Navigation Arrows */}
-          <button 
+          <button
             onClick={goToPrev}
             aria-label="Previous slide"
             className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -ml-4 z-10 bg-[#4B0082] rounded-full p-2 text-white hover:bg-[#5c1e9c] transition-colors"
@@ -150,7 +155,7 @@ export default function MethodCardSection() {
             <ChevronLeftIcon className="h-6 w-6" />
           </button>
 
-          <button 
+          <button
             onClick={goToNext}
             aria-label="Next slide"
             className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 -mr-4 z-10 bg-[#4B0082] rounded-full p-2 text-white hover:bg-[#5c1e9c] transition-colors"
@@ -161,10 +166,10 @@ export default function MethodCardSection() {
 
           {/* Timeline Slider */}
           <Reveal>
-            <div 
+            <div
               ref={sliderRef}
-              className="w-full overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth" 
-              style={{ scrollbarWidth: 'none' }} // Hide scrollbar for Firefox
+              className="w-full overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth"
+              style={{ scrollbarWidth: "none" }} // Hide scrollbar for Firefox
               onMouseEnter={() => setIsAutoPlaying(false)}
               onMouseLeave={() => setIsAutoPlaying(true)}
               onTouchStart={() => setIsAutoPlaying(false)}
@@ -175,12 +180,16 @@ export default function MethodCardSection() {
             >
               <div className="flex gap-4 md:gap-6 w-max">
                 {timelineCards.map((card, index) => (
-                  <div 
+                  <div
                     key={card.timeLabel}
                     className="w-[280px] md:w-[320px] shrink-0 snap-center"
                   >
-                    <motion.div 
-                      className={`h-full rounded-xl border-2 border-[#B663A9] bg-white p-4 md:p-5 flex flex-col shadow-md transition-all duration-300 ${index === currentIndex ? 'scale-100 opacity-100' : 'scale-95 opacity-90'}`}
+                    <motion.div
+                      className={`h-full rounded-xl border-2 border-[#B663A9] bg-white p-4 md:p-5 flex flex-col shadow-md transition-all duration-300 ${
+                        index === currentIndex
+                          ? "scale-100 opacity-100"
+                          : "scale-95 opacity-90"
+                      }`}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
@@ -188,24 +197,25 @@ export default function MethodCardSection() {
                       <div className="bg-[#4B0082] text-white text-xs font-bold py-1 px-3 rounded-full self-start mb-3 font-poppins">
                         {card.timeLabel}
                       </div>
-                      
+
                       <h3 className="text-xl font-bold text-[#4B0082] mb-2 font-poppins">
                         {card.headline}
                       </h3>
-                      
+
                       <p className="text-[#3A3142] flex-grow mb-4 font-poppins">
                         {card.description}
                       </p>
-                      
+
                       <div className="mt-auto rounded-lg overflow-hidden aspect-video">
-                        <img 
-                          src={card.imageUrl} 
-                          alt={`${card.headline} illustration`} 
+                        <img
+                          src={card.imageUrl}
+                          alt={`${card.headline} illustration`}
                           className="w-full h-full object-cover"
                           onError={(e) => {
                             // Fallback image if the specified one doesn't load
                             const target = e.target as HTMLImageElement;
-                            target.src = 'https://via.placeholder.com/320x180?text=Timeline+Image';
+                            target.src =
+                              "https://via.placeholder.com/320x180?text=Timeline+Image";
                           }}
                         />
                       </div>
@@ -215,16 +225,18 @@ export default function MethodCardSection() {
               </div>
             </div>
           </Reveal>
-          
+
           {/* Timeline Indicator Dots */}
           <div className="flex justify-center mt-4 gap-2">
             {timelineCards.map((_, index) => (
               <button
                 key={index}
-                className={`w-2 h-2 rounded-full transition-all ${index === currentIndex ? 'bg-[#4B0082] w-4' : 'bg-gray-300'}`}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  index === currentIndex ? "bg-[#4B0082] w-4" : "bg-gray-300"
+                }`}
                 onClick={() => goToSlide(index)}
                 aria-label={`Go to slide ${index + 1}`}
-                aria-current={index === currentIndex ? 'true' : 'false'}
+                aria-current={index === currentIndex ? "true" : "false"}
               />
             ))}
           </div>
@@ -232,8 +244,8 @@ export default function MethodCardSection() {
 
         {/* CTA Button */}
         <div className="mt-8 text-center">
-          <a 
-            href="#apply" 
+          <a
+            href="#apply"
             className="inline-block bg-[#4B0082] text-white font-bold py-3 px-8 rounded-full hover:bg-[#5c1e9c] transition-colors shadow-md hover:shadow-lg font-poppins"
           >
             Ready to start your timeline? Apply for Coaching →

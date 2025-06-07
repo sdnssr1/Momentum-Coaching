@@ -4,11 +4,12 @@ import Reveal from '../ui/Reveal';
 export default function TransformSection() {
   return (
     <motion.section
-      className="py-20 px-8 max-w-[1280px] mx-auto bg-purple-50"
+      className="py-20 w-full bg-purple-50"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
     >
+      <div className="container mx-auto px-8">
       <Reveal>
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-4xl font-bold text-purple-800 mb-6">
@@ -83,6 +84,7 @@ export default function TransformSection() {
             </p>
           </div>
         </Reveal>
+      </div>
       </div>
     </motion.section>
   );

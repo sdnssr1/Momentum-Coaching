@@ -2,7 +2,6 @@ import { ArrowRight, Calendar, CheckCircle, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLanguage } from "../lib/languageContext";
 import ApplicationForm from "./ApplicationForm";
-import FAQAccordion from "./FAQAccordion";
 import Header from "./Header";
 import ServiceCard from "./ServiceCard";
 import { Button } from "./ui/button";
@@ -13,9 +12,9 @@ import { Separator } from "./ui/separator";
 import Hero from "./sections/Hero";
 import IntroSection from "./sections/IntroSection";
 import MethodCardSection from "./sections/MethodCardSection";
+import MyStorySection from "./sections/MyStorySection";
 import ProblemSection from "./sections/ProblemSection";
 import TransformSection from "./sections/TransformSection";
-
 import FAQSection from "./sections/FAQSection";
 
 const HomePage = () => {
@@ -126,9 +125,10 @@ const HomePage = () => {
       <Hero onApplyClick={() => setShowApplicationForm(true)} />
       <IntroSection />
       <ProblemSection />
+      
+      <MyStorySection />
       <MethodCardSection />
       <TransformSection />
-
       <FAQSection />
 
       {/* Application Form */}
@@ -270,193 +270,17 @@ const HomePage = () => {
 
       {/* Introduction Section */}
       <section className="px-4 py-16 max-w-5xl mx-auto transition-colors duration-700 ease-in-out">
-        <div className="flex flex-col md:flex-row gap-10 items-center">
-          <div className="md:w-1/3">
-            <img
-              src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=800&q=80"
-              alt={t("intro.altText") || "Hannah, Momentum Coach"}
-              className="rounded-full w-64 h-64 object-cover mx-auto shadow-lg"
-            />
-          </div>
-
-          <div className="md:w-2/3">
-            <h2 className="text-3xl font-semibold text-[#4B0082] mb-4">
-              {t("intro.heading") || "Hi, I'm Hannah"}
-            </h2>
-            <p className="text-gray-700 mb-4 text-lg">
-              {t("intro.para1") ||
-                "I built Momentum Coaching for women like you—ambitious, caring, and constantly balancing what you want to achieve with what your body and mind need to thrive."}
-            </p>
-            <p className="text-gray-700 mb-4 text-lg">
-              {t("intro.para2") ||
-                "As someone who's navigated the ups and downs of fitness journeys, I understand that sustainable change doesn't come from extreme measures or one-size-fits-all plans."}
-            </p>
-            <p className="text-gray-700 text-lg">
-              {t("intro.para3") ||
-                "My approach combines evidence-based practices with genuine compassion, creating a partnership where you feel supported, understood, and empowered to build lasting momentum."}
-            </p>
-          </div>
-        </div>
+        {/* Coach image removed */}
       </section>
 
       <Separator className="max-w-5xl mx-auto opacity-30" />
 
-      {/* Services Section */}
-      <section
-        id="services"
-        className="px-4 py-16 max-w-6xl mx-auto transition-colors duration-700 ease-in-out bg-gradient-to-r from-white via-[#FFF8E1]/10 to-white"
-      >
-        <h2 className="text-3xl font-semibold text-[#4B0082] mb-2 text-center">
-          {t("servicesSection.heading") || "How We'll Work Together"}
-        </h2>
-        <p className="text-gray-700 mb-12 text-center max-w-3xl mx-auto text-lg">
-          {t("servicesSection.description") ||
-            "Momentum Coaching offers personalized support through several complementary approaches, each designed to meet you where you are."}
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => (
-            <ServiceCard
-              key={index}
-              title={service.title}
-              description={service.description}
-              icon={service.icon}
-              learnMoreHref={service.learnMoreHref}
-            />
-          ))}
-        </div>
-      </section>
+      {/* Services Section removed */}
 
       {/* Application form was moved to the header dropdown */}
 
-      {/* Why Choose Momentum */}
-      <section className="px-4 py-16 bg-gradient-to-b from-white via-[#FFF8E1]/10 to-white transition-all duration-700 ease-in-out">
-        <div className="max-w-5xl mx-auto transform transition-transform duration-700 ease-in-out">
-          <h2 className="text-3xl font-semibold text-[#4B0082] mb-2 text-center">
-            {t("whySection.heading") || "Why Choose Momentum"}
-          </h2>
-          <p className="text-gray-700 mb-12 text-center max-w-3xl mx-auto text-lg">
-            {t("whySection.description") ||
-              "What makes our approach different from traditional fitness coaching"}
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#FFF8E1] p-6 rounded-lg shadow-md transition-all duration-700 ease-in-out hover:shadow-lg">
-              <CheckCircle className="h-10 w-10 text-[#4B0082] mb-4" />
-              <h3 className="text-xl font-semibold text-[#4B0082] mb-2 transition-colors duration-500">
-                {t("whySection.reason1.title") || "Empathy-Driven Coaching"}
-              </h3>
-              <p className="text-gray-700 transition-colors duration-700">
-                {t("whySection.reason1.desc") ||
-                  "We start by listening and understanding your unique story, challenges, and aspirations before creating any plans."}
-              </p>
-            </div>
-
-            <div className="bg-[#FFF8E1] p-6 rounded-lg shadow-md transition-all duration-700 ease-in-out hover:shadow-lg">
-              <CheckCircle className="h-10 w-10 text-[#4B0082] mb-4" />
-              <h3 className="text-xl font-semibold text-[#4B0082] mb-2 transition-colors duration-500">
-                {t("whySection.reason2.title") || "Fully Customized Plans"}
-              </h3>
-              <p className="text-gray-700 transition-colors duration-700">
-                {t("whySection.reason2.desc") ||
-                  "No cookie-cutter programs here—every recommendation is tailored to your body, preferences, and lifestyle realities."}
-              </p>
-            </div>
-
-            <div className="bg-[#FFF8E1] p-6 rounded-lg shadow-md transition-all duration-700 ease-in-out hover:shadow-lg">
-              <CheckCircle className="h-10 w-10 text-[#4B0082] mb-4" />
-              <h3 className="text-xl font-semibold text-[#4B0082] mb-2 transition-colors duration-500">
-                {t("whySection.reason3.title") || "Integration-Focused"}
-              </h3>
-              <p className="text-gray-700 transition-colors duration-700">
-                {t("whySection.reason3.desc") ||
-                  "We'll develop strategies that realistically fit into your life, rather than asking you to reshape your entire existence."}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Gentle spacing between sections */}
-      <div className="h-16 max-w-5xl mx-auto bg-gradient-to-b from-white via-[#FFF8E1]/10 to-white transition-all duration-700 ease-in-out"></div>
-
-      {/* The Momentum Method */}
-      <section className="py-16 w-full bg-gradient-to-b from-white via-[#FFF8E1]/5 to-white transition-all duration-700 ease-in-out">
-        <div className="max-w-6xl mx-auto px-4 mb-8">
-          <h2 className="text-3xl font-semibold text-[#4B0082] mb-2 text-center">
-            {t("momentumMethod.heading") || "The Momentum Method"}
-          </h2>
-          <p className="text-gray-700 mb-8 text-center max-w-3xl mx-auto text-lg">
-            {t("momentumMethod.subheading") ||
-              "Building sustainable progress that carries you forward even when motivation fluctuates"}
-          </p>
-        </div>
-
-        <div className="bg-white/80 backdrop-blur-sm py-12 px-4 md:px-8 transition-all duration-700 ease-in-out">
-          <div className="max-w-6xl mx-auto">
-            <p className="text-gray-700 mb-6 text-lg">
-              {t("momentumMethod.intro") ||
-                "Momentum is the engine that keeps progress alive when motivation inevitably dips. Unlike quick-fix approaches that lead to burnout, we focus on building genuine momentum through:"}
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-              <div className="border-l-4 border-[#4B0082] pl-4 transition-all duration-700 ease-in-out">
-                <h3 className="text-xl font-semibold text-[#4B0082] mb-2 transition-colors duration-500">
-                  {t("momentumMethod.pillar1.title") || "Consistent Actions"}
-                </h3>
-                <p className="text-gray-700 transition-colors duration-700">
-                  {t("momentumMethod.pillar1.desc") ||
-                    "Small, manageable steps that compound over time, creating sustainable habits rather than exhausting sprints."}
-                </p>
-              </div>
-
-              <div className="border-l-4 border-[#4B0082] pl-4 transition-all duration-700 ease-in-out">
-                <h3 className="text-xl font-semibold text-[#4B0082] mb-2 transition-colors duration-500">
-                  {t("momentumMethod.pillar2.title") ||
-                    "Thoughtful Adjustments"}
-                </h3>
-                <p className="text-gray-700 transition-colors duration-700">
-                  {t("momentumMethod.pillar2.desc") ||
-                    "Regular reflection and fine-tuning of your approach based on what's working and what needs to change."}
-                </p>
-              </div>
-
-              <div className="border-l-4 border-[#4B0082] pl-4 transition-all duration-700 ease-in-out">
-                <h3 className="text-xl font-semibold text-[#4B0082] mb-2 transition-colors duration-500">
-                  {t("momentumMethod.pillar3.title") || "Compassionate Support"}
-                </h3>
-                <p className="text-gray-700 transition-colors duration-700">
-                  {t("momentumMethod.pillar3.desc") ||
-                    "Guidance that celebrates your wins and helps you navigate challenges without judgment or pressure."}
-                </p>
-              </div>
-            </div>
-
-            <p className="text-gray-700 text-lg">
-              {t("momentumMethod.conclusion") ||
-                "This balanced and personalized approach helps you create sustainable progress that feels good and lasts—even when life gets complicated."}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section
-        id="faq"
-        className="px-4 py-16 bg-white transition-colors duration-700 ease-in-out"
-      >
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-semibold text-[#4B0082] mb-2 text-center">
-            {t("faq.heading") || "Frequently Asked Questions"}
-          </h2>
-          <p className="text-gray-700 mb-12 text-center max-w-3xl mx-auto text-lg">
-            {t("faq.subheading") ||
-              "Answers to common questions about Momentum Coaching"}
-          </p>
-
-          <FAQAccordion />
-        </div>
-      </section>
+      {/* 'Why Choose Momentum' section removed */}
+      {/* The Momentum Method section moved above MethodCardSection */}
 
       {/* Footer/Contact Section */}
       <footer
