@@ -83,7 +83,7 @@ export default function MethodCardSection() {
       if (isAutoPlaying) {
         autoPlayTimerRef.current = setInterval(() => {
           goToNext();
-        }, 6000); // Auto-play every 6 seconds
+        }, 4000); // Auto-play every 6 seconds
       }
     };
 
