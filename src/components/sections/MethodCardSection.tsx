@@ -18,11 +18,11 @@ export default function MethodCardSection() {
 
   const timelineCards: TimelineCard[] = [
     {
-      timeLabel: "DAY 0",
+      timeLabel: "WEEK 0",
       headline: "Clarity Call",
       description:
         "We meet on Zoom to map goals, constraints, and desired timeline.",
-      imageUrl: "/images/timeline/day0.jpg", // Images should be placed in the public directory
+      imageUrl: "public/images/timeline/day0.jpg", // Images should be placed in the public directory
     },
     {
       timeLabel: "WEEK 1",
@@ -64,14 +64,14 @@ export default function MethodCardSection() {
       headline: "Lifestyle Integration",
       description:
         "We lock in routines that fit travel, work, and cycles; wellness feels second-nature.",
-      imageUrl: "/images/timeline/week16.jpg",
+      imageUrl: "public/images/timeline/week16.jpg",
     },
     {
       timeLabel: "WEEK 20+",
       headline: "Self-Sustained Flow",
       description:
         "You can fly solo or stay for elite coaching; either way, your new rhythm is yours for life.",
-      imageUrl: "/images/timeline/week20.jpg",
+      imageUrl: "public/images/timeline/week20.jpg",
     },
   ];
 
@@ -207,10 +207,16 @@ export default function MethodCardSection() {
                       </p>
 
                       <div className="mt-auto rounded-lg overflow-hidden aspect-video bg-purple-100">
-                        {/* Use images for Weeks 1, 2, 4, and 12, gradient placeholders for other weeks */}
-                        {card.timeLabel === "WEEK 1" ? (
+                        {card.timeLabel === "WEEK 0" ? (
                           <img
-                            src="public/images/timeline/week1.jpg"
+                            src="/images/timeline/week0.jpg"
+                            alt="Clarity Call"
+                            className="w-full h-full object-cover"
+                            data-component-name="MethodCardSection"
+                          />
+                        ) : card.timeLabel === "WEEK 1" ? (
+                          <img
+                            src="/images/timeline/week1.jpg"
                             alt="Your Custom Blueprint illustration"
                             className="w-full h-full object-cover"
                             data-component-name="MethodCardSection"
@@ -229,6 +235,13 @@ export default function MethodCardSection() {
                             className="w-full h-full object-cover"
                             data-component-name="MethodCardSection"
                           />
+                        ) : card.timeLabel === "WEEK 8" ? (
+                          <img
+                            src="public/images/timeline/week8.jpg"
+                            alt="Momentum Checkpoint illustration"
+                            className="w-full h-full object-cover"
+                            data-component-name="MethodCardSection"
+                          />
                         ) : card.timeLabel === "WEEK 12" ? (
                           <img
                             src="public/images/timeline/week12.jpg"
@@ -243,7 +256,7 @@ export default function MethodCardSection() {
                             className="w-full h-full object-cover"
                             data-component-name="MethodCardSection"
                           />
-                        ) : card.timeLabel === "WEEK 20" ? (
+                        ) : card.timeLabel === "WEEK 20+" ? (
                           <img
                             src="public/images/timeline/week20.jpg"
                             alt="Self-Sustained Flow illustration"
