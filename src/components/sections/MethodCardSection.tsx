@@ -228,7 +228,7 @@ export default function MethodCardSection() {
                             alt="Momentum Checkpoint illustration"
                             className="w-full h-full object-cover"
                             data-component-name="MethodCardSection"
-                          />lin
+                          />
                         ) : card.timeLabel === "WEEK 12" ? (
                           <img
                             src="public/images/timeline/week12.jpg"
