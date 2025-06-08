@@ -22,7 +22,7 @@ export default function MethodCardSection() {
       headline: "Clarity Call",
       description:
         "We meet on Zoom to map goals, constraints, and desired timeline.",
-      imageUrl: "public/images/timeline/day0.jpg", // Images should be placed in the public directory
+      imageUrl: "public/images/timeline/week0.jpg", // Images should be placed in the public directory
     },
     {
       timeLabel: "WEEK 1",
