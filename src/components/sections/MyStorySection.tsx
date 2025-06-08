@@ -192,7 +192,7 @@ const MyStorySection = () => {
                   }}
                 >
                   <img
-                    src="/second.png"
+                    src="/after-image.jpg"
                     alt="Before transformation (2021)"
                     className="w-full h-full object-cover"
                   />
@@ -210,9 +210,9 @@ const MyStorySection = () => {
                   }}
                 >
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#4B0082]">
-                    <img 
-                      src="/logo.png" 
-                      alt="Momentum Coaching Logo" 
+                    <img
+                      src="/logo.png"
+                      alt="Momentum Coaching Logo"
                       className="w-12 h-12 object-contain"
                     />
                   </div>

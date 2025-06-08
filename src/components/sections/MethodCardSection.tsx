@@ -29,35 +29,35 @@ export default function MethodCardSection() {
       headline: "Your Custom Blueprint",
       description:
         "You receive a phased workout & nutrition plan aligned to hormones, schedule, and preferences.",
-      imageUrl: "/images/timeline/week1.jpg",
+      imageUrl: "public/images/timeline/week1.jpg",
     },
     {
       timeLabel: "WEEK 2",
       headline: "Habit Foundations",
       description:
         "Small daily actions anchor movement, hydration, and sleep; momentum starts here.",
-      imageUrl: "/images/timeline/week2.jpg",
+      imageUrl: "public/images/timeline/week2.jpg",
     },
     {
       timeLabel: "WEEK 4",
       headline: "Momentum Checkpoint",
       description:
         "First progress photos and metrics review; we tweak macros or training load if needed.",
-      imageUrl: "/images/timeline/week4.jpg",
+      imageUrl: "public/images/timeline/week4.jpg",
     },
     {
       timeLabel: "WEEK 8",
       headline: "Change Others Notice",
       description:
         "Friends and family see the glow; strength and confidence peak.",
-      imageUrl: "/images/timeline/week8.jpg",
+      imageUrl: "public/images/timeline/week8.jpg",
     },
     {
       timeLabel: "WEEK 12",
       headline: "Breakthrough Phase",
       description:
         "Visible physique shifts and mental resilience; you master advanced lifts or longer runs.",
-      imageUrl: "/images/timeline/week12.jpg",
+      imageUrl: "public/images/timeline/week12.jpg",
     },
     {
       timeLabel: "WEEK 16",
@@ -207,13 +207,60 @@ export default function MethodCardSection() {
                       </p>
 
                       <div className="mt-auto rounded-lg overflow-hidden aspect-video bg-purple-100">
-                        {/* Use a gradient div as placeholder instead of potentially missing images */}
-                        <div 
-                          className="w-full h-full bg-gradient-to-br from-[#B663A9]/20 to-[#4B0082]/10 flex items-center justify-center"
-                          aria-label={`${card.headline} illustration`}
-                        >
-                          <span className="text-[#4B0082] opacity-50 text-sm font-light">{card.timeLabel}</span>
-                        </div>
+                        {/* Use images for Weeks 1, 2, 4, and 12, gradient placeholders for other weeks */}
+                        {card.timeLabel === "WEEK 1" ? (
+                          <img
+                            src="public/images/timeline/week1.jpg"
+                            alt="Your Custom Blueprint illustration"
+                            className="w-full h-full object-cover"
+                            data-component-name="MethodCardSection"
+                          />
+                        ) : card.timeLabel === "WEEK 2" ? (
+                          <img
+                            src="public/images/timeline/week2.jpg"
+                            alt="Habit Foundations illustration"
+                            className="w-full h-full object-cover"
+                            data-component-name="MethodCardSection"
+                          />
+                        ) : card.timeLabel === "WEEK 4" ? (
+                          <img
+                            src="public/images/timeline/week4.jpg"
+                            alt="Momentum Checkpoint illustration"
+                            className="w-full h-full object-cover"
+                            data-component-name="MethodCardSection"
+                          />lin
+                        ) : card.timeLabel === "WEEK 12" ? (
+                          <img
+                            src="public/images/timeline/week12.jpg"
+                            alt="Breakthrough Phase illustration"
+                            className="w-full h-full object-cover"
+                            data-component-name="MethodCardSection"
+                          />
+                        ) : card.timeLabel === "WEEK 16" ? (
+                          <img
+                            src="public/images/timeline/week16.jpg"
+                            alt="Lifestyle Integration illustration"
+                            className="w-full h-full object-cover"
+                            data-component-name="MethodCardSection"
+                          />
+                        ) : card.timeLabel === "WEEK 20" ? (
+                          <img
+                            src="public/images/timeline/week20.jpg"
+                            alt="Self-Sustained Flow illustration"
+                            className="w-full h-full object-cover"
+                            data-component-name="MethodCardSection"
+                          />
+                        ) : (
+                          <div
+                            className="w-full h-full bg-gradient-to-br from-[#B663A9]/20 to-[#4B0082]/10 flex items-center justify-center"
+                            aria-label={`${card.headline} illustration`}
+                            data-component-name="MethodCardSection"
+                          >
+                            <span className="text-[#4B0082] opacity-50 text-sm font-light">
+                              {card.timeLabel}
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </motion.div>
                   </div>
