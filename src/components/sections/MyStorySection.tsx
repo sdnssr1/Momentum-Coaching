@@ -57,19 +57,15 @@ export default function MyStorySection() {
           </div>
         </Reveal>
 
-        <div className="flex flex-col lg:flex-row gap-10 items-center">
-          {/* ───────────────── Left column ───────────────── */}
-          <div className="flex-1">
-            <Reveal>{/* … your narrative content unchanged … */}</Reveal>
-          </div>
-
-          {/* ───────────────── Right column – slider ───────────────── */}
-          <div className="flex-1">
-            <Reveal>
+        {/* Center the slider component */}
+        <div className="flex justify-center items-center mb-10">
+          {/* Centered slider */}
+          <div className="w-full max-w-lg">
+            <Reveal viewport={{ once: true, amount: 0.1 }}>
               <div
                 ref={boxRef}
                 onPointerDown={startDrag}
-                className="relative w-full aspect-[3/4] max-h-[500px] rounded-2xl overflow-hidden shadow-lg cursor-ew-resize select-none"
+                className="relative w-full aspect-[1/1] min-h-[300px] max-h-[500px] rounded-2xl overflow-hidden shadow-lg cursor-ew-resize select-none"
               >
                 {/* AFTER (background) */}
                 <img
