@@ -10,6 +10,7 @@ import Reveal from "../ui/Reveal";
  */
 export default function MyStorySection() {
   const [pos, setPos] = useState(50); // 0-100 %
+  const [isDragging, setIsDragging] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
 
   /** Convert any clientX into a 0-100 % position */
@@ -22,13 +23,23 @@ export default function MyStorySection() {
     );
   };
 
-  /** Unified mouse + touch + pen handler */
+  /** Handle mouse move over the slider */
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Only update position if not currently dragging (to avoid conflicts)
+    if (!isDragging) {
+      setPos(calcPos(e.clientX));
+    }
+  };
+
+  /** Unified pointer drag handler */
   const startDrag = (e: React.PointerEvent<HTMLDivElement>) => {
+    setIsDragging(true);
     e.currentTarget.setPointerCapture(e.pointerId);
     setPos(calcPos(e.clientX));
 
     const move = (ev: PointerEvent) => setPos(calcPos(ev.clientX));
     const up = (ev: PointerEvent) => {
+      setIsDragging(false);
       ev.currentTarget?.removeEventListener("pointermove", move);
       ev.currentTarget?.removeEventListener("pointerup", up);
     };
@@ -65,6 +76,7 @@ export default function MyStorySection() {
               <div
                 ref={boxRef}
                 onPointerDown={startDrag}
+                onMouseMove={handleMouseMove}
                 className="relative w-full aspect-[1/1] min-h-[300px] max-h-[500px] rounded-2xl overflow-hidden shadow-lg cursor-ew-resize select-none"
               >
                 {/* AFTER (background) */}
