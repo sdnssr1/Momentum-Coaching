@@ -25,7 +25,7 @@ export default function Hero({ onApplyClick }: HeroProps) {
             <p className="mt-4 text-xl text-gray-700 max-w-xl">
               Private 1-to-1 coaching for true beginners who crave confidence,
               steady progress, and a kinder way to train. Gentle workouts,
-              mindful nutrition, and compassionate accountability—so you lose
+              mindful nutrition, and compassionate accountability, so you lose
               fat, build strength, and reclaim inner peace.
             </p>
 
